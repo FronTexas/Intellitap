@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingRight="10dp">
+
+    <!--Summary Icon-->
+    <ImageView
+        android:id="@+id/ivSummaryIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/dollar_icon"
+        android:layout_centerVertical="true" />
+
+    <!--Summary content-->
+    <com.example.fron.customviews.MyTextView
+        android:id="@+id/tvSummaryContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/BlueIntellitap"
+        android:layout_toRightOf="@+id/ivSummaryIcon"
+        android:text="$450"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        custom:typeface="roboto_bold" />
+
+    <!--Summary description-->
+    <com.example.fron.customviews.MyTextView
+        android:id="@+id/tvSummaryDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:typeface="roboto_bold"
+        android:text="money made"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvSummaryContent"
+        android:layout_marginTop="30dp"
+        android:textSize="10sp"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:background="@color/Gray">
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/student_icon_squared" />
+
+    <AutoCompleteTextView
+        android:id="@+id/atvInvitePeople"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Invite people to come over!"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        android:background="@android:color/white"
+        android:singleLine="true"
+        android:imeOptions="actionDone" />
+
+    <LinearLayout
+        android:id="@+id/llFriendsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/GrayF9"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:animateLayoutChanges="true"></LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/drop_shadow_down" />
+
+</LinearLayout>

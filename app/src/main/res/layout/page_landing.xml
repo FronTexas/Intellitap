@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/Gray">
+
+    <!--Circle fact-->
+    <RelativeLayout
+        android:id="@+id/llFactCircle"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:background="@drawable/circle_blue"
+        android:layout_gravity="center">
+
+        <!--Fact Text-->
+        <LinearLayout
+            android:id="@+id/llFact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvFactNumbers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto_bold"
+                android:text="500,234"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.example.fron.customviews.MyTextView
+                    android:id="@+id/tvFactObject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tutors"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    custom:typeface="roboto" />
+
+                <com.example.fron.customviews.MyTextView
+                    android:id="@+id/tvAndCountingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    custom:typeface="roboto_italic"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:text=",and counting" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--Intellitap logo-->
+        <com.example.fron.customviews.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/llFact"
+            custom:typeface="roboto_bold_italic"
+            android:text="intellitap"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:layout_marginTop="10sp" />
+
+
+    </RelativeLayout>
+
+    <!--Sign up button-->
+    <RelativeLayout
+        android:id="@+id/rlSignUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginTop="60dp"
+        android:background="@color/GreenIntellitap">
+
+        <com.example.fron.customviews.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign me up"
+            android:textColor="@android:color/white"
+            android:layout_centerInParent="true"
+            custom:typeface="roboto_bold"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+    <!--Shadow-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/drop_shadow_down" />
+
+    <!--Sign in field-->
+    <LinearLayout
+        android:id="@+id/llSignInField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp">
+
+    </LinearLayout>
+
+    <!--Sign In button-->
+    <RelativeLayout
+        android:id="@+id/rlSignInButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/RedIntellitap">
+
+        <com.example.fron.customviews.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in"
+            android:textColor="@android:color/white"
+            android:layout_centerInParent="true"
+            custom:typeface="roboto_bold"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+    <!--Shadow-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/drop_shadow_down" />
+
+
+</LinearLayout>

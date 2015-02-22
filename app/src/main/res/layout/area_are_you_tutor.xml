@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp">
+
+    <com.example.fron.customviews.MyTextView
+        android:id="@+id/areyoututor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/BlueIntellitap"
+        custom:typeface="roboto_bold_italic"
+        android:text="Are you a user? "
+        android:textSize="25sp" />
+
+    <com.example.fron.customviews.MyTextView
+        android:id="@+id/tvYes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:typeface="roboto_bold"
+        android:textColor="@android:color/black"
+        android:text="Yes"
+        android:layout_below="@id/areyoututor"
+        android:layout_marginTop="5dp"
+        android:textSize="25dp" />
+
+    <com.example.fron.customviews.MyTextView
+        android:id="@+id/tvNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:typeface="roboto_bold"
+        android:textColor="@android:color/black"
+        android:text="No"
+        android:layout_toRightOf="@id/tvYes"
+        android:layout_alignBottom="@id/tvYes"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:textSize="25dp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="75dp"
+    android:paddingTop="20dp">
+
+
+    <!--The main card-->
+    <RelativeLayout
+        android:id="@+id/rlMainCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"
+        android:layout_below="@+id/rlPictures"
+        android:layout_marginTop="-70dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <!--Username-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mark Daniel"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            custom:typeface="roboto_bold" />
+        <!--User comments-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvUserComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="'Very punctual'"
+            android:layout_below="@id/tvUserName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textSize="40sp"
+            custom:typeface="roboto_italic" />
+
+        <!--Rating star-->
+        <LinearLayout
+            android:id="@+id/llRatingStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvUserComment"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <!--Upvotes and downvotes-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llRatingStar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp">
+            <!--Upvotes-->
+            <LinearLayout
+                android:id="@+id/llUpvotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="bottom">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/arrow_up_icon" />
+
+                <com.example.fron.customviews.MyTextView
+                    android:id="@+id/tvUpvotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="3.2k"
+                    custom:typeface="roboto_bold_italic" />
+            </LinearLayout>
+            <!--Downvotes-->
+            <LinearLayout
+                android:id="@+id/llDownvotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_toRightOf="@+id/llUpvotes"
+                android:gravity="bottom"
+                android:layout_marginLeft="10dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/arrow_down_icon" />
+
+                <com.example.fron.customviews.MyTextView
+                    android:id="@+id/tvDownvotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="1"
+                    custom:typeface="roboto_bold_italic" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <!--maincard shadow-->
+    <View
+        android:id="@+id/shadow_main_card"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/drop_shadow_down"
+        android:layout_below="@id/rlMainCard" />
+
+    <!--See All review-->
+    <RelativeLayout
+        android:id="@+id/rlSeeAllReview"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/BlueIntellitap"
+        android:layout_below="@id/rlMainCard"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true">
+
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvSeeAllReviewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See all review"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/white"
+            custom:typeface="roboto_bold" />
+    </RelativeLayout>
+
+    <!--See all review shadow-->
+    <View
+        android:layout_width="150dp"
+        android:layout_height="2dp"
+        android:background="@drawable/drop_shadow_down"
+        android:layout_below="@id/rlSeeAllReview"
+        android:layout_alignLeft="@id/rlSeeAllReview" />
+
+
+    <!--Provider pictures area-->
+    <RelativeLayout
+        android:id="@+id/rlPictures"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:background="@drawable/circle"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/ivProviderPicture"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/circle_blue"></ImageView>
+    </RelativeLayout>
+
+
+</RelativeLayout>

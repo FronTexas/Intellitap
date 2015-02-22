@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="BlueIntellitap">#3598dc</color>
+    <color name="GreenIntellitap">#2fcc71</color>
+    <color name="RedIntellitap">#e94c3e</color>
+    <color name="Gray">#f2f2f2</color>
+    <color name="GrayIntellitap">#7e8c8c</color>
+    <color name="GrayB3">#b3b3b3</color>
+    <color name="GrayF9">#f9f9f9</color>
+    <color name="Gray4d">#4d4d4d</color>
+    <color name="DarkBlueIntellitap">#2d3e50</color>
+
+
+</resources>

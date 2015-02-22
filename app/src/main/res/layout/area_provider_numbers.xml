@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="3"
+    android:padding="20dp">
+
+    <!--average rating-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/GrayIntellitap"
+        android:layout_weight="1"
+        android:padding="5dp">
+
+        <!--the rating-->
+        <LinearLayout
+            android:id="@+id/llRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/stars_icon" />
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto_bold_italic"
+                android:text="5.0 "
+                android:textColor="@android:color/white"
+                android:textSize="35sp"
+                android:layout_marginLeft="5dp" />
+
+
+        </LinearLayout>
+
+        <!--average rating text-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvAverageRatingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Average rating"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            custom:typeface="roboto_bold" />
+
+
+    </RelativeLayout>
+
+    <!--hourly rate-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/GreenIntellitap"
+        android:layout_weight="1"
+        android:padding="5dp">
+        <!--the hourly rate-->
+        <LinearLayout
+            android:id="@+id/llHourlyRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_centerInParent="true">
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvDollarSign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto_bold_italic"
+                android:text="$"
+                android:textSize="40sp" />
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvHourlyRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto_bold_italic"
+                android:text="00 "
+                android:textColor="@android:color/white"
+                android:textSize="35sp"
+                android:layout_marginLeft="5dp" />
+
+
+        </LinearLayout>
+
+        <!--average rating text-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvHourlyRateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hourly rate"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            custom:typeface="roboto_bold" />
+    </RelativeLayout>
+
+    <!--Max students-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@color/RedIntellitap"
+        android:layout_weight="1"
+        android:padding="5dp">
+        <!--max students-->
+        <LinearLayout
+            android:id="@+id/llMaxStudents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/student_icon2" />
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvMaxStudents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto_bold_italic"
+                android:text="00 "
+                android:textColor="@android:color/white"
+                android:textSize="35sp"
+                android:layout_marginLeft="5dp" />
+
+
+        </LinearLayout>
+
+        <!--max student text-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvMaxStudentsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Max # of students"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            custom:typeface="roboto_bold" />
+    </RelativeLayout>
+
+
+</LinearLayout>

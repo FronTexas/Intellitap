@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <!--Title area-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/GrayF9"
+        android:padding="10dp">
+
+        <!--Iv title-->
+        <ImageView
+            android:id="@+id/ivTitle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/teach_icon"
+            android:layout_centerVertical="true" />
+
+        <!--Tv title-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Gray4d"
+            android:layout_centerVertical="true"
+            custom:typeface="roboto_bold_italic"
+            android:text="Teaching Request"
+            android:layout_toRightOf="@+id/ivTitle"
+            android:layout_marginLeft="5dp" />
+
+        <!--Notification -->
+        <LinearLayout
+            android:id="@+id/llNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true">
+
+            <!--total notif count-->
+            <RelativeLayout
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/round_corner_rectangle_red">
+
+                <com.example.fron.customviews.MyTextView
+                    android:id="@+id/tvTotalNotif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@android:color/white"
+                    android:text="10"
+                    android:textSize="13sp"
+                    custom:typeface="roboto_bold" />
+
+            </RelativeLayout>
+
+            <!--tv new notif-->
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvTitleNotif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Gray4d"
+                android:text="New request"
+                android:textSize="13sp"
+                android:layout_marginLeft="5dp"
+                custom:typeface="roboto_bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--The content-->
+    <LinearLayout
+        android:id="@+id/llContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/drop_shadow_down" />
+
+
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp">
+
+    <com.example.fron.customviews.MyEditText
+        android:id="@+id/etMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:hint="Hint"
+        custom:typeface="roboto_bold"
+        android:textColor="@android:color/black" />
+
+    <View
+        android:id="@+id/blue_highlighter"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="5dp" />
+
+</LinearLayout>

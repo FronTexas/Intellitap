@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp">
+
+    <!--Student profile picture-->
+    <ImageView
+        android:id="@+id/ivStudentPic"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/circle_green" />
+
+    <!--Students Info-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/ivStudentPic"
+        android:layout_marginLeft="10dp">
+
+
+
+        <!--Student name-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mark Daniel"
+            custom:typeface="roboto_bold"
+            android:textSize="20sp"
+            android:textColor="@color/Gray4d" />
+
+        <!--Subject tutored-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Probability And Statistics"
+            custom:typeface="roboto_bold"/>
+
+        <!--Total other student-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvTotalOtherStudent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/GreenIntellitap"
+            android:text="+ 10 others"
+            android:textSize="15sp"
+            custom:typeface="roboto_bold_italic" />
+
+        <!--Day and date-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvDayAndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Gray4d"
+            android:text="Monday, Jan 1st 2015"
+            custom:typeface="roboto"
+            android:textSize="13sp" />
+
+        <!--Time-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="07:30 - 08:30"
+            custom:typeface="roboto"
+            android:textSize="13sp"
+            android:textColor="@color/Gray4d" />
+
+        <!--Location-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/BlueIntellitap"
+            custom:typeface="roboto"
+            android:textSize="13sp"
+            android:text="View Point Apartments, West Campus" />
+
+    </LinearLayout>
+
+</RelativeLayout>

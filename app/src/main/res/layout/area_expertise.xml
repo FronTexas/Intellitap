@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <!--Expertise-->
+    <LinearLayout
+        android:id="@+id/llExpertise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/diamond_icon" />
+
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvExpertiseText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expertise"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            custom:typeface="roboto_bold_italic" />
+
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvExpertise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/BlueIntellitap"
+            android:text="Calculus, Probability And Statistics , Artificial Intelligence"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            custom:typeface="roboto" />
+    </LinearLayout>
+
+</LinearLayout>

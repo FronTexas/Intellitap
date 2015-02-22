@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <!--Searchbox-->
+        <EditText
+            android:id="@+id/etSearchBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:background="@android:color/white"
+            android:hint="Search Tutors"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:textCursorDrawable="@drawable/blue_cursor" />
+
+        <!--Shadow-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/etSearchBox"
+            android:background="@drawable/drop_shadow_down" />
+
+        <!--Search options radio-->
+        <LinearLayout
+            android:id="@+id/llSearchOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etSearchBox"
+            android:orientation="horizontal">
+
+            <!--Name-->
+            <RelativeLayout
+                android:id="@+id/rlName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivIdCard"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/id_card_icon"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/tvNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ivIdCard"
+                    android:text="Name"
+                    android:layout_centerVertical="true"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="5dp" />
+
+                <View
+                    android:id="@+id/name_selector"
+                    android:layout_width="85dp"
+                    android:layout_height="5dp"
+                    android:background="@color/GreenIntellitap"
+                    android:layout_below="@+id/ivIdCard"
+                    android:layout_marginTop="10dp"></View>
+
+
+            </RelativeLayout>
+
+            <!--Skills-->
+            <RelativeLayout
+                android:id="@+id/rlSkills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp">
+
+                <ImageView
+                    android:id="@+id/ivDiamond"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/diamond_icon"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/tvSkillsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ivDiamond"
+                    android:text="Skills"
+                    android:layout_centerVertical="true"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="5dp" />
+
+                <View
+                    android:id="@+id/skills_selector"
+                    android:layout_width="80dp"
+                    android:layout_height="5dp"
+                    android:background="@color/GreenIntellitap"
+                    android:layout_below="@+id/ivDiamond"
+                    android:layout_marginTop="10dp"
+                    android:visibility="invisible"></View>
+            </RelativeLayout>
+
+            <!--Location-->
+            <RelativeLayout
+                android:id="@+id/rlLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp">
+
+                <ImageView
+                    android:id="@+id/ivLocation"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/place_icon"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/tvLocationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ivLocation"
+                    android:text="Location"
+                    android:layout_centerVertical="true"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="5dp" />
+
+                <View
+                    android:id="@+id/location_selector"
+                    android:layout_width="100dp"
+                    android:layout_height="5dp"
+                    android:background="@color/GreenIntellitap"
+                    android:layout_below="@+id/ivLocation"
+                    android:layout_marginTop="10dp"
+                    android:visibility="invisible"></View>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <!--Recent Search-->
+        <LinearLayout
+            android:id="@+id/llRecentSearch"
+            android:layout_below="@id/llSearchOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/tvRecentSearchText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recent Search"
+                android:textColor="@color/GrayIntellitap" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/drop_shadow_down" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

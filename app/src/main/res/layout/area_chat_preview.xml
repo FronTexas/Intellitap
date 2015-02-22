@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp">
+
+    <!--Student profile picture-->
+    <ImageView
+        android:id="@+id/ivStudentPic"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/circle_green" />
+
+    <!--Students Info-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/ivStudentPic"
+        android:layout_marginLeft="10dp">
+
+        <!--Student name-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Taylor Swift"
+            custom:typeface="roboto_bold"
+            android:textSize="20sp"
+            android:textColor="@color/Gray4d" />
+
+        <!--Chat preview-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvChatPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Gray4d"
+            android:singleLine="true"
+            android:text="We should go to cat cafe sometimes"
+            custom:typeface="roboto"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
