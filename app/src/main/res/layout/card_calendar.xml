@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,20 +10,72 @@
         android:id="@+id/llCalendarCard"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingTop="10dp"
         android:background="@android:color/white">
 
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            custom:typeface="roboto_bold"
+            android:layout_marginBottom="5dp" />
+
+        <!--The days notation : S M T W T F S-->
         <GridView
-            android:id="@+id/gvDates"
+            android:id="@+id/gvDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="7"
             android:layout_marginTop="10dp"></GridView>
 
-        <ViewPager
-            android:id="@+id/pageDates"
+        <!--This viewpager will contains gridview dates-->
+        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pagerDates"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:paddingTop="10dp" />
+
+
+        <!--Day information-->
+        <LinearLayout
+            android:id="@+id/llDayInformation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ViewPager>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp">
+
+            <!--Day state : {Today, Yesterday,Tommorow}-->
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvStateOfDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto_bold"
+                android:textColor="@color/BlueIntellitap"
+                android:text="Today" />
+
+            <!--Day and data-->
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvDayAndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto"
+                android:textColor="@color/BlueIntellitap"
+                android:layout_marginLeft="10dp" />
+        </LinearLayout>
+
+        <!--Gridview thta will contains the hour when the tutor is available-->
+        <GridView
+            android:id="@+id/gvTimeSlots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="5"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"></GridView>
     </LinearLayout>
 
     <View

@@ -14,6 +14,8 @@ import android.widget.RelativeLayout;
  */
 public class PageLanding extends Fragment {
 
+    public static String FRAGMENT_TAG = "planding";
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.page_landing, null);

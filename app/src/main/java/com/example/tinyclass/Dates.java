@@ -3,14 +3,40 @@ package com.example.tinyclass;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * Created by Fahran on 2/21/2015.
  */
 public class Dates implements Parcelable {
+    // TODO change date and month to just one milliseconds parameter
     String date;
     String month;
     boolean isTutotAvailable;
+    ArrayList<TimeSlot> timeSlots;
 
+    public Dates(String date, String month, boolean isTutotAvailable) {
+        this.date = date;
+        this.month = month;
+        this.isTutotAvailable = isTutotAvailable;
+    }
+
+
+    public Dates(Parcel in) {
+        date = in.readString();
+        month = in.readString();
+        isTutotAvailable = in.readByte() != 0;
+    }
+
+    public void setTimeSlots(ArrayList<TimeSlot> timeSlots) {
+        this.timeSlots = timeSlots;
+    }
+
+
+    @Override
+    public String toString() {
+        return month + "/" + date + " " + isTutotAvailable;
+    }
 
     public static final Creator<Dates> CREATOR = new Creator<Dates>() {
 
@@ -25,11 +51,6 @@ public class Dates implements Parcelable {
         }
     };
 
-    public Dates(String date, String month, boolean isTutotAvailable) {
-        this.date = date;
-        this.month = month;
-        this.isTutotAvailable = isTutotAvailable;
-    }
 
     public String getDate() {
         return date;
@@ -43,11 +64,6 @@ public class Dates implements Parcelable {
         return isTutotAvailable;
     }
 
-    public Dates(Parcel in) {
-        date = in.readString();
-        month = in.readString();
-        isTutotAvailable = in.readByte() != 0;
-    }
 
     @Override
     public int describeContents() {
@@ -60,4 +76,9 @@ public class Dates implements Parcelable {
         out.writeString(month);
         out.writeByte((byte) (isTutotAvailable ? 1 : 0));
     }
+}
+
+class TimeSlot {
+    String time;
+    String duration;
 }

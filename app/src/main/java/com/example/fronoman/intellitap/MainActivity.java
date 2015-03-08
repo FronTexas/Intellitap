@@ -58,7 +58,7 @@ public class MainActivity extends FragmentActivity {
         actionBarAction = (LinearLayout) findViewById(R.id.actionBarAction);
 
         if (savedInstanceState == null)
-            replaceFragments(new PageSignUp(), false, PageSearch.FRAGMENT_TAG);
+            replaceFragments(new PageLanding(), false, PageLanding.FRAGMENT_TAG);
 
 
     }

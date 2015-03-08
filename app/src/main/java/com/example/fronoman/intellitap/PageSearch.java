@@ -85,7 +85,7 @@ public class PageSearch extends Fragment implements PageSearchHeader.OnSearchLis
         String[] institutes = new String[]{"Google", "Cambridge University", "Pied Piper", "Tesla motors", "University Of Helsinki"};
         String[] skills = new String[]{"Algorithm Design", "Astrophysics", "Compression Algorithm", "How to be awesome", "Operating System (OS)"};
         String[] city = new String[]{"Mountain View , CA", "Trinity Lane , Cambridge", "Palo Alto, CA", "Palo Alto , CA", "San Fransisco , CA"};
-        String[] photoUrl = new String[]{"https://lh3.googleusercontent.com/-k2GLxHmgJJ0/UUCSHMw2XGI/AAAAAAADO1I/i9oZkWDgINY/w617-h618-no/LarryPage2012_03_edited.JPG","http://goo.gl/kwAhFd","http://goo.gl/qWGVzU","https://pbs.twimg.com/profile_images/420314816444502016/xj5TnUsx.jpeg","http://goo.gl/eUSjLO"};
+        String[] photoUrl = new String[]{"https://lh3.googleusercontent.com/-k2GLxHmgJJ0/UUCSHMw2XGI/AAAAAAADO1I/i9oZkWDgINY/w617-h618-no/LarryPage2012_03_edited.JPG", "http://goo.gl/kwAhFd", "http://goo.gl/qWGVzU", "https://pbs.twimg.com/profile_images/420314816444502016/xj5TnUsx.jpeg", "http://goo.gl/eUSjLO"};
 
         for (int i = 0; i < names.length; i++) {
             Tutor t = new Tutor();
@@ -120,13 +120,13 @@ public class PageSearch extends Fragment implements PageSearchHeader.OnSearchLis
         if (queries.get("skill") != null) {
             skill = queries.get("skill");
             // TODO this is only temporary. Since the search service only works on city, other than city search i will just use fake data
-            populateListingCards("skill",skill);
+            populateListingCards("skill", skill);
         }
 
         if (queries.get("identifier") != null) {
             identifier = queries.get("identifier");
             // TODO this is only temporary. Since the search service only works on city, other than city search i will just use fake data
-            populateListingCards("identifier",identifier);
+            populateListingCards("identifier", identifier);
         }
 
         if (queries.get("city") != null) {
@@ -134,8 +134,7 @@ public class PageSearch extends Fragment implements PageSearchHeader.OnSearchLis
         }
 
 
-
-        if(city.length() > 0){
+        if (city.length() > 0) {
             // fill provider_listing_cards and conncect it with respective user object
             service.listTutors(city, new Callback<ArrayList<Tutor>>() {
                 @Override
@@ -168,42 +167,42 @@ public class PageSearch extends Fragment implements PageSearchHeader.OnSearchLis
 
     }
 
-    public void populateListingCards(String query_type,String query){
-        Log.d("Populating listing cards with fake data ","Getting into populateListingCards");
+    public void populateListingCards(String query_type, String query) {
+        Log.d("Populating listing cards with fake data ", "Getting into populateListingCards");
         ArrayList<ProviderListingCard> plcs = new ArrayList<>();
-         for(final Tutor t : fake_tutors){
-             if(query_type == "skill"){
-                 if(t.skills.toLowerCase().contains(query.toLowerCase())){
-                     ProviderListingCard plc = new ProviderListingCard(getActivity(),t);
-                     plc.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View v) {
-                             PageProviderProfile pp = new PageProviderProfile();
-                             Bundle b = new Bundle();
-                             b.putParcelable(C.TUTOR_KEY, t);
-                             pp.setArguments(b);
-                             ((MainActivity) getActivity()).replaceFragments(pp, true, PageProviderProfile.FRAGMENT_TAG);
-                         }
-                     });
-                     plcs.add(plc);
-                 }
-             }else if(query_type == "identifier"){
-                 if(t.firstName.toLowerCase().contains(query.toLowerCase()) || t.lastName.toLowerCase().contains(query.toLowerCase())){
-                     ProviderListingCard plc = new ProviderListingCard(getActivity(),t);
-                     plc.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View v) {
-                             PageProviderProfile pp = new PageProviderProfile();
-                             Bundle b = new Bundle();
-                             b.putParcelable(C.TUTOR_KEY, t);
-                             pp.setArguments(b);
-                             ((MainActivity) getActivity()).replaceFragments(pp, true, PageProviderProfile.FRAGMENT_TAG);
-                         }
-                     });
-                     plcs.add(plc);
-                 }
-             }
-         }
+        for (final Tutor t : fake_tutors) {
+            if (query_type == "skill") {
+                if (t.skills.toLowerCase().contains(query.toLowerCase())) {
+                    ProviderListingCard plc = new ProviderListingCard(getActivity(), t);
+                    plc.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PageProviderProfile pp = new PageProviderProfile();
+                            Bundle b = new Bundle();
+                            b.putParcelable(C.TUTOR_KEY, t);
+                            pp.setArguments(b);
+                            ((MainActivity) getActivity()).replaceFragments(pp, true, PageProviderProfile.FRAGMENT_TAG);
+                        }
+                    });
+                    plcs.add(plc);
+                }
+            } else if (query_type == "identifier") {
+                if (t.firstName.toLowerCase().contains(query.toLowerCase()) || t.lastName.toLowerCase().contains(query.toLowerCase())) {
+                    ProviderListingCard plc = new ProviderListingCard(getActivity(), t);
+                    plc.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            PageProviderProfile pp = new PageProviderProfile();
+                            Bundle b = new Bundle();
+                            b.putParcelable(C.TUTOR_KEY, t);
+                            pp.setArguments(b);
+                            ((MainActivity) getActivity()).replaceFragments(pp, true, PageProviderProfile.FRAGMENT_TAG);
+                        }
+                    });
+                    plcs.add(plc);
+                }
+            }
+        }
 
         searchAdapter.plcs = plcs;
         searchAdapter.notifyDataSetChanged();

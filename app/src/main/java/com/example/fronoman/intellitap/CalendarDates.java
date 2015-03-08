@@ -3,9 +3,11 @@ package com.example.fronoman.intellitap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,10 +29,11 @@ public class CalendarDates extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.card_calendar, null);
-        initializeViews(v);
+        View v = inflater.inflate(R.layout.calendar_dates_fragment, null);
 
         dates = getArguments().getParcelableArrayList(C.DATES_ARRAYLIST_KEY);
+
+        initializeViews(v);
 
 
         return v;
@@ -69,7 +72,37 @@ public class CalendarDates extends Fragment {
             dates_r[i] = r;
         }
 
-//        gvDates.setAdapter(new CalendarAdapter(dates_r));
+        gvDates.setAdapter(new DatesAdapter(dates_r));
+    }
+
+    class DatesAdapter extends BaseAdapter{
+        RelativeLayout[]  dates_r;
+
+        public DatesAdapter(RelativeLayout[] dates_r){
+            this.dates_r = dates_r;
+        }
+
+        @Override
+        public int getCount() {
+            return dates_r.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+
+            return dates_r[position];
+        }
     }
 }
 
