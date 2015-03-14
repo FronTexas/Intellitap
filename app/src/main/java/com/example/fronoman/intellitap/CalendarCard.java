@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,7 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
     private GridView gvDays;
     private ViewPager pagerDates;
 
-    private boolean turnOfOnClickListener;
+    private boolean turnOffOnClickListener;
 
     // Month in the top of the card
     private MyTextView tvMonth;
@@ -74,7 +73,6 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
         if (today_month % 10 == today_month) {
             today_mdy = "0" + today_mdy;
         }
-        Log.d("today mdy", "today mdy = " + today_mdy);
 
         SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
         Date dateInstance = null;
@@ -123,7 +121,7 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
         ArrayList<DateIntellitapp> date_arraylist = dates_arraylist_list.get(0);
 
         // get date intellitapp for exactly todays date
-        DateIntellitapp di = date_arraylist.get(today_day_week);
+        DateIntellitapp di = date_arraylist.get(today_day_week - 1);
 
         // get Today's timeslots
         ArrayList<TimeSlot> timeSlots = di.getTimeSlots();
@@ -147,20 +145,12 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
             tvDuration.setText(timeSlots.get(i).duration);
         }
         gvTimeSlots.setAdapter(new CalendarAdapter(time_slot_item));
-        if (!turnOfOnClickListener)
+        if (!turnOffOnClickListener)
             gvTimeSlots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     View selected_red_bar = view.findViewById(R.id.selected_red_bar);
-
-                    if (time_slot_selected != null) {
-                        View selected_red_bar2 = time_slot_selected.findViewById(R.id.selected_red_bar);
-                        selected_red_bar2.setBackgroundColor(getResources().getColor(android.R.color.white));
-                    }
-
                     changeColorAnimation(selected_red_bar, selected_red_bar.getSolidColor(), getResources().getColor(R.color.RedIntellitap));
-
-
                     time_slot_selected = view;
 
                 }
@@ -168,7 +158,7 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
     }
 
     public void turnOffTimeSlotClickListener() {
-        turnOfOnClickListener = true;
+        turnOffOnClickListener = true;
         if (gvTimeSlots != null) {
             gvTimeSlots.setOnItemClickListener(null);
         }
