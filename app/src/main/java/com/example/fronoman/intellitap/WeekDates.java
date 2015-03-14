@@ -26,7 +26,7 @@ import java.util.Date;
 /**
  * Created by Fahran on 2/21/2015.
  */
-public class CalendarDates extends Fragment {
+public class WeekDates extends Fragment {
 
     private GridView gvDates;
 
@@ -72,6 +72,7 @@ public class CalendarDates extends Fragment {
 
     public void initializeViews(View v) throws ParseException {
         gvDates = (GridView) v.findViewById(R.id.gvDates);
+        gvDates.setSelector(android.R.color.transparent);
         if (dates != null)
             fillDates();
     }
@@ -133,8 +134,14 @@ public class CalendarDates extends Fragment {
 
                 highlighted_dates = r;
             } else if (dates.get(i).isTutorAvailable()) {
-                tfi.setTypeface(tvDates, TypefaceIntellitap.ROBOTO_BOLD);
-                tvDates.setTextColor(getResources().getColor(R.color.GreenIntellitap));
+                if (dates.get(i).getDateInMilli() >= todaysdateMilli) {
+                    tfi.setTypeface(tvDates, TypefaceIntellitap.ROBOTO_BOLD);
+                    tvDates.setTextColor(getResources().getColor(R.color.GreenIntellitap));
+                } else {
+                    tfi.setTypeface(tvDates, TypefaceIntellitap.ROBOTO);
+                    tvDates.setTextColor(getResources().getColor(R.color.Gray20));
+                }
+
 
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) (circle_size * scaleDP + 0.5f), (int) (circle_size * scaleDP + 0.5f));
                 blue_circle.setLayoutParams(params);
@@ -166,27 +173,31 @@ public class CalendarDates extends Fragment {
 
             dates_r[i] = r;
 
+
             // when particular r is clicked it set the blue circle at highlighted dates to white and update the highlighted dates to the view that just
             // clicked
-            r.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (highlighted_dates != null) {
-                        highlighted_dates.findViewById(BLUE_CIRCLE_ID).setBackground(getResources().getDrawable(R.drawable.circle));
-                        tfi.setTypeface((TextView) highlighted_dates.findViewById(TV_DATES_ID), TypefaceIntellitap.ROBOTO_BOLD);
-                        ((TextView) highlighted_dates.findViewById(TV_DATES_ID)).setTextColor(getResources().getColor(R.color.GreenIntellitap));
+            if (dates.get(i).getDateInMilli() >= todaysdateMilli) {
+                r.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (highlighted_dates != null) {
+                            highlighted_dates.findViewById(BLUE_CIRCLE_ID).setBackground(getResources().getDrawable(R.drawable.circle));
+                            tfi.setTypeface((TextView) highlighted_dates.findViewById(TV_DATES_ID), TypefaceIntellitap.ROBOTO_BOLD);
+                            ((TextView) highlighted_dates.findViewById(TV_DATES_ID)).setTextColor(getResources().getColor(R.color.GreenIntellitap));
+                        }
+
+
+                        v.findViewById(BLUE_CIRCLE_ID).setBackground(getResources().getDrawable(R.drawable.circle_blue));
+                        tfi.setTypeface((TextView) v.findViewById(TV_DATES_ID), TypefaceIntellitap.ROBOTO);
+                        ((TextView) v.findViewById(TV_DATES_ID)).setTextColor(getResources().getColor(android.R.color.white));
+                        highlighted_dates = v;
+
+                        dateSelectedListener.onDateSelectedListener(((DatesRelativeLayout) v).date);
+                        Log.d("date on r", "" + ((DatesRelativeLayout) v).date);
                     }
+                });
+            }
 
-
-                    v.findViewById(BLUE_CIRCLE_ID).setBackground(getResources().getDrawable(R.drawable.circle_blue));
-                    tfi.setTypeface((TextView) v.findViewById(TV_DATES_ID), TypefaceIntellitap.ROBOTO);
-                    ((TextView) v.findViewById(TV_DATES_ID)).setTextColor(getResources().getColor(android.R.color.white));
-                    highlighted_dates = v;
-
-                    dateSelectedListener.onDateSelectedListener(((DatesRelativeLayout) v).date);
-                    Log.d("date on r", "" + ((DatesRelativeLayout) v).date);
-                }
-            });
         }
 
         gvDates.setAdapter(new DatesAdapter(dates_r));

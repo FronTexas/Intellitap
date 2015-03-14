@@ -31,7 +31,7 @@ import java.util.Date;
 /**
  * Created by Fahran on 2/21/2015.
  */
-public class CalendarCard extends LinearLayout implements CalendarDates.DateSelectedListener {
+public class CalendarCard extends LinearLayout implements WeekDates.DateSelectedListener {
 
     int today_month, today_day_week, today_day_month, today_year;
     long today_millisecond;
@@ -117,19 +117,32 @@ public class CalendarCard extends LinearLayout implements CalendarDates.DateSele
         tvDayAndDate.setText(days[today_day_week - 1] + " , " + months[today_month] + " " + today_day_month);
 
 
-        View[] time_slot_item = new View[5];
-        String[] time_slot = {"09:00", "11:00", "13:00", "15:00", "17:00"};
-        String[] duration = {"1h", "1h", "1h", "1h", "1h"};
+        // get dates in the first week
+        ArrayList<DateIntellitapp> date_arraylist = dates_arraylist_list.get(0);
 
+        // get date intellitapp for exactly todays date
+        DateIntellitapp di = date_arraylist.get(today_day_week);
+
+        // get Today's timeslots
+        ArrayList<TimeSlot> timeSlots = di.getTimeSlots();
+        buildTimeSlots(timeSlots);
+
+    }
+
+    public void buildTimeSlots(ArrayList<TimeSlot> timeSlots) {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        for (int i = 0; i < time_slot_item.length; i++) {
+
+        View[] time_slot_item = new View[timeSlots.size()];
+
+
+        for (int i = 0; i < time_slot_item.length; i++)  {
             time_slot_item[i] = inflater.inflate(R.layout.time_slot_item, null);
             MyTextView tvTime = (MyTextView) time_slot_item[i].findViewById(R.id.tvTime);
             MyTextView tvDuration = (MyTextView) time_slot_item[i].findViewById(R.id.tvDuration);
 
 
-            tvTime.setText(time_slot[i]);
-            tvDuration.setText(duration[i]);
+            tvTime.setText(timeSlots.get(i).time);
+            tvDuration.setText(timeSlots.get(i).duration);
         }
         gvTimeSlots.setAdapter(new CalendarAdapter(time_slot_item));
         gvTimeSlots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -173,6 +186,19 @@ public class CalendarCard extends LinearLayout implements CalendarDates.DateSele
         ArrayList<DateIntellitapp> dates = new ArrayList<>();
         int left = totalLeft(today_day_week);
         int n = today_day_month - left;
+
+        String[] time_slot = {"09:00", "11:00", "13:00", "15:00", "17:00"};
+        String[] duration = {"1h", "1h", "1h", "1h", "1h"};
+        ArrayList<TimeSlot> time_slots = new ArrayList<>();
+
+        for (int i = 0; i < time_slot.length; i++) {
+            TimeSlot ts = new TimeSlot();
+            ts.duration = duration[i];
+            ts.time = time_slot[i];
+            time_slots.add(ts);
+        }
+
+
         for (int i = n; i < n + 14; i++) {
             int month;
             int day_month;
@@ -206,7 +232,9 @@ public class CalendarCard extends LinearLayout implements CalendarDates.DateSele
 
 
             DateIntellitapp date = new DateIntellitapp(day_month, month, year, true);
+            date.setTimeSlots(time_slots);
             dates.add(date);
+
 
             // if its finishing first week or if its finishing 2nd week
             if (i == n + 6 || i == n + 13) {
@@ -269,7 +297,7 @@ public class CalendarCard extends LinearLayout implements CalendarDates.DateSele
         cal.setTime(date);
 
         tvDayAndDate.setText(days[cal.get(Calendar.DAY_OF_WEEK) - 1] + " , " + months[cal.get(Calendar.MONTH)] + " " + cal.get(Calendar.DAY_OF_MONTH));
-
+        buildTimeSlots(date_selected.getTimeSlots());
 
     }
 
@@ -284,14 +312,15 @@ public class CalendarCard extends LinearLayout implements CalendarDates.DateSele
         @Override
         public Fragment getItem(int position) {
             // A list of all dates in a week from Sunday to Saturday
-            CalendarDates cdates = new CalendarDates();
+            WeekDates week_dates = new WeekDates();
 
             // listening for a calendar click
-            cdates.setOnDateSelectedListener(CalendarCard.this);
+            week_dates.setOnDateSelectedListener(CalendarCard.this);
+
             Bundle b = new Bundle();
             b.putParcelableArrayList(C.DATES_ARRAYLIST_KEY, dates_arraylist_list.get(position));
-            cdates.setArguments(b);
-            return cdates;
+            week_dates.setArguments(b);
+            return week_dates;
         }
 
         @Override

@@ -3,6 +3,8 @@ package com.example.tinyclass;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.fronoman.intellitap.TimeSlot;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,13 +23,17 @@ public class DateIntellitapp implements Parcelable {
     int year;
     boolean isTutotAvailable;
     private final String[] months = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
-    ArrayList<TimeSlot> timeSlots;
+    private ArrayList<TimeSlot> timeSlots;
 
     public DateIntellitapp(int date, int month, int year, boolean isTutotAvailable) {
         this.date = date;
         this.month = month;
         this.isTutotAvailable = isTutotAvailable;
         this.year = year;
+    }
+
+    public ArrayList<TimeSlot> getTimeSlots() {
+        return timeSlots;
     }
 
 
@@ -100,7 +106,3 @@ public class DateIntellitapp implements Parcelable {
     }
 }
 
-class TimeSlot {
-    String time;
-    String duration;
-}
