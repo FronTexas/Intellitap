@@ -43,6 +43,8 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
     private GridView gvDays;
     private ViewPager pagerDates;
 
+    private boolean turnOfOnClickListener;
+
     // Month in the top of the card
     private MyTextView tvMonth;
 
@@ -135,7 +137,7 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
         View[] time_slot_item = new View[timeSlots.size()];
 
 
-        for (int i = 0; i < time_slot_item.length; i++)  {
+        for (int i = 0; i < time_slot_item.length; i++) {
             time_slot_item[i] = inflater.inflate(R.layout.time_slot_item, null);
             MyTextView tvTime = (MyTextView) time_slot_item[i].findViewById(R.id.tvTime);
             MyTextView tvDuration = (MyTextView) time_slot_item[i].findViewById(R.id.tvDuration);
@@ -145,26 +147,28 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
             tvDuration.setText(timeSlots.get(i).duration);
         }
         gvTimeSlots.setAdapter(new CalendarAdapter(time_slot_item));
-        gvTimeSlots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                View selected_red_bar = view.findViewById(R.id.selected_red_bar);
+        if (!turnOfOnClickListener)
+            gvTimeSlots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    View selected_red_bar = view.findViewById(R.id.selected_red_bar);
 
-                if (time_slot_selected != null) {
-                    View selected_red_bar2 = time_slot_selected.findViewById(R.id.selected_red_bar);
-                    selected_red_bar2.setBackgroundColor(getResources().getColor(android.R.color.white));
+                    if (time_slot_selected != null) {
+                        View selected_red_bar2 = time_slot_selected.findViewById(R.id.selected_red_bar);
+                        selected_red_bar2.setBackgroundColor(getResources().getColor(android.R.color.white));
+                    }
+
+                    changeColorAnimation(selected_red_bar, selected_red_bar.getSolidColor(), getResources().getColor(R.color.RedIntellitap));
+
+
+                    time_slot_selected = view;
+
                 }
-
-                changeColorAnimation(selected_red_bar, selected_red_bar.getSolidColor(), getResources().getColor(R.color.RedIntellitap));
-
-
-                time_slot_selected = view;
-
-            }
-        });
+            });
     }
 
     public void turnOffTimeSlotClickListener() {
+        turnOfOnClickListener = true;
         if (gvTimeSlots != null) {
             gvTimeSlots.setOnItemClickListener(null);
         }

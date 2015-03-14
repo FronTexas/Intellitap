@@ -34,7 +34,7 @@ public class WeekDates extends Fragment {
     ArrayList<DateIntellitapp> dates;
 
     // Refer to view of highlighted date in the dates arraylist
-    private View highlighted_dates;
+    private DatesRelativeLayout highlighted_dates;
 
     private float scaleDP;
 
@@ -77,7 +77,7 @@ public class WeekDates extends Fragment {
             fillDates();
     }
 
-    public void fillDates() throws ParseException {
+    private void fillDates() throws ParseException {
 
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
@@ -95,7 +95,7 @@ public class WeekDates extends Fragment {
         Date dateInstance = sdf.parse(today_date);
 
         // todays mm/dd/yyyy in milliseconds
-        long todaysdateMilli = dateInstance.getTime();
+        final long todaysdateMilli = dateInstance.getTime();
 
         final RelativeLayout[] dates_r = new RelativeLayout[dates.size()];
         final TypefaceIntellitap tfi = ((MainActivity) getActivity()).tfi;
@@ -176,21 +176,29 @@ public class WeekDates extends Fragment {
 
             // when particular r is clicked it set the blue circle at highlighted dates to white and update the highlighted dates to the view that just
             // clicked
-            if (dates.get(i).getDateInMilli() >= todaysdateMilli) {
+            if (dates.get(i).getDateInMilli() >= todaysdateMilli && dates.get(i).isTutorAvailable()) {
                 r.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (highlighted_dates != null) {
                             highlighted_dates.findViewById(BLUE_CIRCLE_ID).setBackground(getResources().getDrawable(R.drawable.circle));
                             tfi.setTypeface((TextView) highlighted_dates.findViewById(TV_DATES_ID), TypefaceIntellitap.ROBOTO_BOLD);
-                            ((TextView) highlighted_dates.findViewById(TV_DATES_ID)).setTextColor(getResources().getColor(R.color.GreenIntellitap));
+
+                            try {
+                                if (highlighted_dates.date.getDateInMilli() == todaysdateMilli) {
+                                    ((TextView) highlighted_dates.findViewById(TV_DATES_ID)).setTextColor(getResources().getColor(R.color.RedIntellitap));
+                                } else
+                                    ((TextView) highlighted_dates.findViewById(TV_DATES_ID)).setTextColor(getResources().getColor(R.color.GreenIntellitap));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
 
 
                         v.findViewById(BLUE_CIRCLE_ID).setBackground(getResources().getDrawable(R.drawable.circle_blue));
                         tfi.setTypeface((TextView) v.findViewById(TV_DATES_ID), TypefaceIntellitap.ROBOTO);
                         ((TextView) v.findViewById(TV_DATES_ID)).setTextColor(getResources().getColor(android.R.color.white));
-                        highlighted_dates = v;
+                        highlighted_dates = (DatesRelativeLayout) v;
 
                         dateSelectedListener.onDateSelectedListener(((DatesRelativeLayout) v).date);
                         Log.d("date on r", "" + ((DatesRelativeLayout) v).date);
