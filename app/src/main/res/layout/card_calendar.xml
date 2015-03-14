@@ -12,17 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="20dp"
-        android:paddingTop="10dp"
         android:background="@android:color/white">
 
-        <com.example.fron.customviews.MyTextView
-            android:id="@+id/tvMonth"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="20sp"
-            custom:typeface="roboto_bold"
-            android:layout_marginBottom="5dp" />
+            android:padding="10dp"
+            android:background="@color/BlueIntellitap"
+            android:layout_marginBottom="5dp">
+            <!--The month-->
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="20sp"
+                custom:typeface="roboto_bold"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+
 
         <!--The days notation : S M T W T F S-->
         <GridView
@@ -36,7 +44,7 @@
         <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/pagerDates"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:paddingTop="10dp" />
 
 
@@ -56,26 +64,27 @@
                 android:layout_height="wrap_content"
                 custom:typeface="roboto_bold"
                 android:textColor="@color/BlueIntellitap"
-                android:text="Today" />
+                android:text="Today"
+                android:layout_marginRight="10dp" />
 
-            <!--Day and data-->
+            <!--Day and date-->
             <com.example.fron.customviews.MyTextView
                 android:id="@+id/tvDayAndDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 custom:typeface="roboto"
-                android:textColor="@color/BlueIntellitap"
-                android:layout_marginLeft="10dp" />
+                android:textColor="@color/BlueIntellitap" />
         </LinearLayout>
 
-        <!--Gridview thta will contains the hour when the tutor is available-->
+        <!--Gridview timeslot-->
         <GridView
             android:id="@+id/gvTimeSlots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:numColumns="5"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"></GridView>
+            android:layout_marginTop="10dp"
+            android:listSelector="@android:color/transparent"></GridView>
     </LinearLayout>
 
     <View

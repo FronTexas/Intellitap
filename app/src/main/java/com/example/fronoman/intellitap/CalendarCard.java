@@ -1,5 +1,7 @@
 package com.example.fronoman.intellitap;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -17,8 +20,10 @@ import android.widget.TextView;
 
 import com.example.fron.customviews.MyTextView;
 import com.example.fron.customviews.TypefaceIntellitap;
-import com.example.tinyclass.Dates;
+import com.example.tinyclass.DateIntellitapp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,9 +31,10 @@ import java.util.Date;
 /**
  * Created by Fahran on 2/21/2015.
  */
-public class CalendarCard extends LinearLayout {
+public class CalendarCard extends LinearLayout implements CalendarDates.DateSelectedListener {
 
-    int today_month, today_day_week, today_day_month;
+    int today_month, today_day_week, today_day_month, today_year;
+    long today_millisecond;
 
     private final String[] days = {"SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"};
     private final String[] months = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
@@ -44,8 +50,11 @@ public class CalendarCard extends LinearLayout {
     private MyTextView tvStateOfDay, tvDayAndDate;
     private GridView gvTimeSlots;
 
-    private ArrayList<ArrayList<Dates>> dates_arraylist_list;
+    private ArrayList<ArrayList<DateIntellitapp>> dates_arraylist_list;
     PagerDatesAdapter pagerDatesAdapter;
+
+    // view to keep track of selected time slot. Used in gvTimeSlots set on item click listener
+    private View time_slot_selected;
 
     public CalendarCard(Context context) {
         super(context);
@@ -57,6 +66,22 @@ public class CalendarCard extends LinearLayout {
         today_month = cal.get(Calendar.MONTH);
         today_day_week = cal.get(Calendar.DAY_OF_WEEK);
         today_day_month = cal.get(Calendar.DAY_OF_MONTH);
+        today_year = cal.get(Calendar.YEAR);
+
+        String today_mdy = today_month + 1 + "." + today_day_month + "." + today_year;
+        if (today_month % 10 == today_month) {
+            today_mdy = "0" + today_mdy;
+        }
+        Log.d("today mdy", "today mdy = " + today_mdy);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
+        Date dateInstance = null;
+        try {
+            dateInstance = sdf.parse(today_mdy);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        today_millisecond = dateInstance.getTime();
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.card_calendar, null);
@@ -101,42 +126,86 @@ public class CalendarCard extends LinearLayout {
             time_slot_item[i] = inflater.inflate(R.layout.time_slot_item, null);
             MyTextView tvTime = (MyTextView) time_slot_item[i].findViewById(R.id.tvTime);
             MyTextView tvDuration = (MyTextView) time_slot_item[i].findViewById(R.id.tvDuration);
+
+
             tvTime.setText(time_slot[i]);
             tvDuration.setText(duration[i]);
         }
-        for (View ts : time_slot_item) {
-            Log.d("Calendar time slot populating error", "CTSPE -- TS = " + ts);
-        }
         gvTimeSlots.setAdapter(new CalendarAdapter(time_slot_item));
+        gvTimeSlots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                View selected_red_bar = view.findViewById(R.id.selected_red_bar);
 
+                if (time_slot_selected != null) {
+                    View selected_red_bar2 = time_slot_selected.findViewById(R.id.selected_red_bar);
+                    selected_red_bar2.setBackgroundColor(getResources().getColor(android.R.color.white));
+                }
+
+                changeColorAnimation(selected_red_bar, selected_red_bar.getSolidColor(), getResources().getColor(R.color.RedIntellitap));
+
+
+                time_slot_selected = view;
+
+            }
+        });
+    }
+
+    public void turnOffTimeSlotClickListener() {
+        if (gvTimeSlots != null) {
+            gvTimeSlots.setOnItemClickListener(null);
+        }
+    }
+
+    public void changeColorAnimation(final View v, int colorFrom, int colorTo) {
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                v.setBackgroundColor((int) animation.getAnimatedValue());
+            }
+        });
+        colorAnimation.start();
     }
 
 
     public void fillPagerDates() {
-        ArrayList<Dates> dates = new ArrayList<>();
+        ArrayList<DateIntellitapp> dates = new ArrayList<>();
         int left = totalLeft(today_day_week);
         int n = today_day_month - left;
         for (int i = n; i < n + 14; i++) {
             int month;
             int day_month;
+            int year = 0;
             if (i <= 0) {
                 // go to previous month
                 month = today_month - 1;
 
-                // if month == 0 then the prev month is December
+                // if month == 0 then the prev month is  and the year is moved back for a year
                 if (month == -1) {
                     month = 11;
+                    year -= 1;
                 }
                 day_month = monthTotalDays[month] - i;
+
+            } else if (i > monthTotalDays[today_month]) {
+                month = today_month + 1;
+
+                // if month == 12 then the next month is January and the year is moved front for a year
+                if (month == 12) {
+                    month = 0;
+                    year += 1;
+                }
+                day_month = i - monthTotalDays[today_month] + 1;
 
             } else {
                 month = today_month;
                 day_month = i;
+                year = today_year;
             }
 
 
-
-            Dates date = new Dates("" + (day_month), months[month], true);
+            DateIntellitapp date = new DateIntellitapp(day_month, month, year, true);
             dates.add(date);
 
             // if its finishing first week or if its finishing 2nd week
@@ -173,6 +242,37 @@ public class CalendarCard extends LinearLayout {
         gvDays.setAdapter(new CalendarAdapter(days_r));
     }
 
+    @Override
+    public void onDateSelectedListener(DateIntellitapp date_selected) {
+        tvStateOfDay.setVisibility(View.VISIBLE);
+        try {
+            if (today_millisecond - date_selected.getDateInMilli() == 0) {
+                tvStateOfDay.setText("Today");
+            } else if (today_millisecond - date_selected.getDateInMilli() == -82800000 || today_millisecond - date_selected.getDateInMilli() == -86400000) {
+                tvStateOfDay.setText("Tommorow");
+            } else if (today_millisecond - date_selected.getDateInMilli() == 82800000 || today_millisecond - date_selected.getDateInMilli() == 86400000) {
+                tvStateOfDay.setText("Yesterday");
+            } else {
+                tvStateOfDay.setVisibility(View.GONE);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Date date = new Date();
+        try {
+            date.setTime(date_selected.getDateInMilli());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        tvDayAndDate.setText(days[cal.get(Calendar.DAY_OF_WEEK) - 1] + " , " + months[cal.get(Calendar.MONTH)] + " " + cal.get(Calendar.DAY_OF_MONTH));
+
+
+    }
+
     class PagerDatesAdapter extends FragmentStatePagerAdapter {
 
 
@@ -185,6 +285,9 @@ public class CalendarCard extends LinearLayout {
         public Fragment getItem(int position) {
             // A list of all dates in a week from Sunday to Saturday
             CalendarDates cdates = new CalendarDates();
+
+            // listening for a calendar click
+            cdates.setOnDateSelectedListener(CalendarCard.this);
             Bundle b = new Bundle();
             b.putParcelableArrayList(C.DATES_ARRAYLIST_KEY, dates_arraylist_list.get(position));
             cdates.setArguments(b);

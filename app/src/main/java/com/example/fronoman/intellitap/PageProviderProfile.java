@@ -51,7 +51,10 @@ public class PageProviderProfile extends Fragment {
 
         View provider_meta_data_area = buildProviderMetaDataArea(inflater);
         View provider_numbers = buildProviderNumbersArea(inflater);
-        View calendar_card = new CalendarCard(getActivity());
+
+        CalendarCard calendar_card = new CalendarCard(getActivity());
+        calendar_card.turnOffTimeSlotClickListener();
+
         View expertise = buildExpertiseArea(inflater);
         View preferredLocation = buildPreferredLocation(inflater);
         View userComment = buildUserCommentArea(inflater);

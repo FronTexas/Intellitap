@@ -81,7 +81,7 @@ public class PageSearch extends Fragment implements PageSearchHeader.OnSearchLis
 
     public void buildFakeTutors() {
         fake_tutors = new ArrayList<>();
-        String[] names = new String[]{"Larry Page", "Steven Hawking", "Richard Hendricks", "Elon Musk", "Linus Trovalds"};
+        String[] names = new String[]{"Larry Page", "Stephen Hawking", "Richard Hendricks", "Elon Musk", "Linus Trovalds"};
         String[] institutes = new String[]{"Google", "Cambridge University", "Pied Piper", "Tesla motors", "University Of Helsinki"};
         String[] skills = new String[]{"Algorithm Design", "Astrophysics", "Compression Algorithm", "How to be awesome", "Operating System (OS)"};
         String[] city = new String[]{"Mountain View , CA", "Trinity Lane , Cambridge", "Palo Alto, CA", "Palo Alto , CA", "San Fransisco , CA"};

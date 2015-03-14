@@ -3,7 +3,8 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingRight="10dp">
 
     <com.example.fron.customviews.MyTextView
         android:id="@+id/tvTime"
@@ -20,5 +21,12 @@
         custom:typeface="roboto_bold"
         android:text="1h"
         android:textSize="10sp" />
+
+    <View
+        android:id="@+id/selected_red_bar"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/white"
+        android:layout_marginTop="5dp" />
 
 </LinearLayout>
