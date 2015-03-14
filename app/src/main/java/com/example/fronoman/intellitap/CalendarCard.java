@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +55,6 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
     private ArrayList<ArrayList<DateIntellitapp>> dates_arraylist_list;
     PagerDatesAdapter pagerDatesAdapter;
 
-    // view to keep track of selected time slot. Used in gvTimeSlots set on item click listener
-    private View time_slot_selected;
 
     public CalendarCard(Context context) {
         super(context);
@@ -150,9 +149,14 @@ public class CalendarCard extends LinearLayout implements WeekDates.DateSelected
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     View selected_red_bar = view.findViewById(R.id.selected_red_bar);
-                    changeColorAnimation(selected_red_bar, selected_red_bar.getSolidColor(), getResources().getColor(R.color.RedIntellitap));
-                    time_slot_selected = view;
-
+                    Log.d("Red selector problem", "selected color = " + view.getTag() + ", resource red = " + getResources().getColor(R.color.RedIntellitap));
+                    if (view.getTag() != null && (int) view.getTag() - getResources().getColor(R.color.RedIntellitap) == 0) {
+                        changeColorAnimation(selected_red_bar, (int) view.getTag(), getResources().getColor(android.R.color.white));
+                        view.setTag(getResources().getColor(android.R.color.white));
+                    } else {
+                        changeColorAnimation(selected_red_bar, selected_red_bar.getSolidColor(), getResources().getColor(R.color.RedIntellitap));
+                        view.setTag(getResources().getColor(R.color.RedIntellitap));
+                    }
                 }
             });
     }
