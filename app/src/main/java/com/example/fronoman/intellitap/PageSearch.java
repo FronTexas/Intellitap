@@ -56,7 +56,7 @@ public class PageSearch extends Fragment implements PageSearchHeader.OnSearchLis
         ((MainActivity) getActivity()).setActionBarTitle("Search");
 
         adapter = new RestAdapter.Builder()
-                .setEndpoint("http://intellitapphost-2v3pn8usug.elasticbeanstalk.com")
+                .setEndpoint(C.MAIN_URL)
                 .build();
 
         service = adapter.create(IntellitappService.class);

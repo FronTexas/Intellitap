@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingRight="10dp">
+    android:layout_height="wrap_content">
 
     <!--Summary Icon-->
     <ImageView
@@ -36,7 +35,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tvSummaryContent"
         android:layout_marginTop="30dp"
-        android:textSize="10sp"/>
+        android:textSize="10sp" />
 
 
 </RelativeLayout>

@@ -151,10 +151,10 @@ public class PageHome extends Fragment {
 
             views.add(buildAppointmentItem(inflater, appointment));
             s.split();
-            Log.d("Homepage performance:","After build appointment item = " + s.getSplitTime());
+            Log.d("Homepage performance:", "After build appointment item = " + s.getSplitTime());
         }
         s.split();
-        Log.d("Homepage performance:","After filling appointments item loop = " + s.getSplitTime());
+        Log.d("Homepage performance:", "After filling appointments item loop = " + s.getSplitTime());
         s.stop();
 
         teaching_request.setViewContents(views);
@@ -219,6 +219,16 @@ public class PageHome extends Fragment {
 
             TextView tvSummaryDescription = (TextView) weekly_summary_item.findViewById(R.id.tvSummaryDescription);
             tvSummaryDescription.setText(weekly_summary_description[i]);
+
+            if (i != weekly_summary_icon.length - 1) {
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                if (i == 0) {
+                    params.rightMargin = (int) (20 * scaleDP + 0.5f);
+                } else
+                    params.rightMargin = (int) (13 * scaleDP + 0.5f);
+                weekly_summary_item.setLayoutParams(params);
+            }
+
 
             view_content.add(weekly_summary_item);
         }

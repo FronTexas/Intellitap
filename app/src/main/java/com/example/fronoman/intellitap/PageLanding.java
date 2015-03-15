@@ -25,7 +25,7 @@ public class PageLanding extends Fragment {
         rlSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).replaceFragments(new PageSignUp(), false, PageSignUp.FRAGMENT_TAG);
+                ((MainActivity) getActivity()).replaceFragments(new PageSignUp(), true, PageSignUp.FRAGMENT_TAG);
             }
         });
 
