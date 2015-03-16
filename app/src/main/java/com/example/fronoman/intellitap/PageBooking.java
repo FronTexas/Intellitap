@@ -75,14 +75,14 @@ public class PageBooking extends Fragment {
                 }
                 appointment.dayAndDate = "Monday , Jan 1st 2015";
                 appointment.startEndTime = "8:00 - 9:00";
-                appointment.expertise = skills.toString();
+                appointment.skills = skills;
                 appointment.invited_user = invited_user;
                 appointment.location = etMeetingPlace.getText().toString();
 
 
                 ((MainActivity) getActivity()).user.booked_appoinment.add(appointment);
 
-                ((MainActivity)getActivity()).replaceFragments(new PageHome(),false,PageHome.FRAGMENT_TAG);
+                ((MainActivity) getActivity()).replaceFragments(new PageHome(), false, PageHome.FRAGMENT_TAG);
             }
         });
 
@@ -150,11 +150,11 @@ public class PageBooking extends Fragment {
     private View buildWDYWTLArea(LayoutInflater inflater) {
         View v = inflater.inflate(R.layout.area_wdwtl, null);
         llWDYWTL = (LinearLayout) v.findViewById(R.id.llWdwtl);
-        String[] skills = tutor.skills.split(",");
-        TextView[] tvs = new TextView[skills.length];
+        ArrayList<Skill> skills = tutor.skills;
+        TextView[] tvs = new TextView[skills.size()];
         int i = 0;
         for (TextView tv : tvs) {
-            tv = createTextView(skills[i]);
+            tv = createTextView(skills.get(i).skillName);
             if (tvs.length == 1) {
                 tv.setTextColor(getResources().getColor(R.color.GreenIntellitap));
                 ((MainActivity) getActivity()).tfi.setTypeface(tv, TypefaceIntellitap.ROBOTO_BOLD);

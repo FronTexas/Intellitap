@@ -28,7 +28,7 @@ public class EditTextCustom extends LinearLayout {
     public EditTextCustom(Context context, String hint) {
         super(context);
 
-        scaleDP = ((MainActivity) context).scaleDP;
+        scaleDP = getResources().getDisplayMetrics().density;
 
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

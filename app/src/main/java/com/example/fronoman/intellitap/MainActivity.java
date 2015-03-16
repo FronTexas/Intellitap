@@ -44,8 +44,9 @@ public class MainActivity extends FragmentActivity {
         // TODO this is fake. In the future User will be the one who logged in not only Matthew mc :)
         buildUser();
 
+
         // default color
-        action_bar_current_color = getResources().getColor(R.color.BlueIntellitap);
+        action_bar_current_color = getResources().getColor(android.R.color.transparent);
 
         actionbar = findViewById(R.id.action_bar_main);
 
@@ -57,8 +58,12 @@ public class MainActivity extends FragmentActivity {
 
         actionBarAction = (LinearLayout) findViewById(R.id.actionBarAction);
 
-        if (savedInstanceState == null)
-            replaceFragments(new PageLanding(), false, PageLanding.FRAGMENT_TAG);
+        if (getIntent().getExtras() != null) {
+            String fragment_tag_passed = getIntent().getExtras().getString(C.FRAGMENT_TAG_KEY);
+            if (fragment_tag_passed.equals(PageSignUp.FRAGMENT_TAG)) {
+                replaceFragments(new PageSignUp(), false, PageSignUp.FRAGMENT_TAG);
+            }
+        }
 
 
     }
@@ -93,14 +98,18 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void setActionBarColor(int color) {
-        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), action_bar_current_color, color);
-        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                actionbar.setBackgroundColor((int) animation.getAnimatedValue());
-            }
-        });
-        colorAnimation.start();
+        if (action_bar_current_color == getResources().getColor(android.R.color.transparent)) {
+            actionbar.setBackgroundColor(color);
+        } else {
+            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), action_bar_current_color, color);
+            colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    actionbar.setBackgroundColor((int) animation.getAnimatedValue());
+                }
+            });
+            colorAnimation.start();
+        }
         action_bar_current_color = color;
     }
 

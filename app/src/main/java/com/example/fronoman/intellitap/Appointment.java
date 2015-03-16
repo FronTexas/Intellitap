@@ -11,14 +11,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class Appointment implements Parcelable {
     User user;
-    String expertise;
+    ArrayList<Skill> skills;
     ArrayList<User> invited_user;
     String dayAndDate;
     String startEndTime;
     String location;
 
 
-    public static final Creator<Appointment> CREATOR = new Creator<Appointment>(){
+    public static final Creator<Appointment> CREATOR = new Creator<Appointment>() {
 
         @Override
         public Appointment createFromParcel(Parcel source) {
@@ -31,20 +31,20 @@ public class Appointment implements Parcelable {
         }
     };
 
-    public Appointment(Parcel in){
+    public Appointment(Parcel in) {
         user = in.readParcelable(getClass().getClassLoader());
-        expertise = in.readString();
-        in.readTypedList(invited_user,User.CREATOR);
+        in.readList(skills, Skill.class.getClassLoader());
+        in.readTypedList(invited_user, User.CREATOR);
         dayAndDate = in.readString();
         startEndTime = in.readString();
         location = in.readString();
     }
 
-    public Appointment(User user){
+    public Appointment(User user) {
         this.user = user;
         invited_user = new ArrayList<>();
-        if(user instanceof Tutor)
-            expertise = ((Tutor)user).skills;
+        if (user instanceof Tutor)
+            skills = ((Tutor) user).skills;
 
     }
 
@@ -55,8 +55,8 @@ public class Appointment implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeParcelable(user,0);
-        out.writeString(expertise);
+        out.writeParcelable(user, 0);
+        out.writeList(skills);
         out.writeTypedList(invited_user);
         out.writeString(dayAndDate);
         out.writeString(startEndTime);

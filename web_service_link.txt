@@ -1,1 +1,7 @@
-http://intellitapphost-2v3pn8usug.elasticbeanstalk.com
+http://intellitubbieenv-sp5hbwrbgb.elasticbeanstalk.com
+
+User sign up
+http://intellitubbieenv-sp5hbwrbgb.elasticbeanstalk.com/app/resources/newUser/Bugs-Bunny/bugs@bunny.com
+
+Query tutors
+http://intellitubbieenv-sp5hbwrbgb.elasticbeanstalk.com/app/resources/queryTutors?city=Austin&state=TX

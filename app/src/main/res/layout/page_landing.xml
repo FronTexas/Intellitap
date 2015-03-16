@@ -77,17 +77,6 @@
                     android:textSize="15sp" />
             </RelativeLayout>
 
-            <!--Shadow-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@drawable/drop_shadow_down" />
-
-            <!--Shadow-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@drawable/drop_shadow_down" />
         </LinearLayout>
     </ScrollView>
 
