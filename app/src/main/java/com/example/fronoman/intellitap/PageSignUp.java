@@ -146,18 +146,30 @@ public class PageSignUp extends Fragment {
         button_sign_up.setTextSize(17);
         button_sign_up.setButtonColor(getResources().getColor(R.color.RedIntellitap));
         llMain.addView(button_sign_up);
+
         final String[] signUp_key = new String[]{"firstName", "lastName", "email", "password", "checkPassword", "phone", "city", "state"};
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<String, String> map = new HashMap<>();
+                String email = "";
+                String firstName = "";
+                String lastName = "";
+
+
                 for (int i = 0; i < signUpFields.size(); i++) {
                     map.put(signUp_key[i], signUpFields.get(i).getText().toString());
                     if (signUp_key[i].equals("email"))
-                        map.put("uniqueIdentifie", signUpFields.get(i).getText().toString());
+                        map.put("uniqueIdentifier", signUpFields.get(i).getText().toString());
+                    if (signUp_key[i].equals("firstName"))
+                        firstName = signUpFields.get(i).getText().toString();
+                    if (signUp_key[i].equals("lastName"))
+                        lastName = signUpFields.get(i).getText().toString();
                 }
-                map.put("isTutor", "" + isTutor);
-                service.newUser(map, new Callback<String>() {
+
+
+
+                service.newUser(firstName, lastName, email, map, new Callback<String>() {
                     @Override
                     public void success(String s, Response response) {
                         Log.d("Signing up ", "s = " + s);
@@ -217,5 +229,7 @@ public class PageSignUp extends Fragment {
             return views[position];
         }
     }
+
+
 
 }

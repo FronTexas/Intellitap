@@ -11,8 +11,8 @@
         android:layout_height="70dp"
         android:src="@drawable/place_icon" />
 
-    <EditText
-        android:id="@+id/etMeetingPlace"
+    <AutoCompleteTextView
+        android:id="@+id/atvMeetingPlace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"

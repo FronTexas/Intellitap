@@ -28,9 +28,12 @@ public interface IntellitappService {
                     @Query("state") @Nullable String state,
                     Callback<ArrayList<Tutor>> callback);
 
-    @POST("/app/resources/newUser")
-    void newUser(@QueryMap Map<String, String> signUpField,Callback<String> callback);
-
+    @POST("/app/resources/newUser/{firstName}-{lastName}/{email}")
+    void newUser(@Path("firstName") String firstName,
+                 @Path("lastName") String lastName,
+                 @Path("email") String email,
+                 @QueryMap Map<String, String> signUpField,
+                 Callback<String> callback);
 
 
 }

@@ -16,6 +16,7 @@ public class User implements Parcelable {
     String userId;
     String email;
     String profilePhotoUrl;
+    Boolean isTutor;
     ArrayList<Education> education;
 
 

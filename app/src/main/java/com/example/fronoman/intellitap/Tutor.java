@@ -13,10 +13,8 @@ import java.util.ArrayList;
 public class Tutor extends User {
 
     int stars;
-    Boolean isTutor;
     ArrayList<Skill> skills;
     ArrayList<Employment> employments;
-//    ArrayList<DateIntellitapp> datesAvailable;
 
 
     @Override
@@ -37,7 +35,7 @@ public class Tutor extends User {
         }
     };
 
-    public Tutor(){
+    public Tutor() {
 
     }
 

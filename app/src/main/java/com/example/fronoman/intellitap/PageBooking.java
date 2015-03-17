@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,8 +16,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.BaseAdapter;
-import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,6 +26,16 @@ import android.widget.TextView;
 import com.example.fron.customviews.MyTextView;
 import com.example.fron.customviews.TypefaceIntellitap;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -36,10 +47,20 @@ public class PageBooking extends Fragment {
     private RelativeLayout rlBook;
     private Tutor tutor;
 
-    EditText etMeetingPlace;
+    private AutoCompleteTextView atvMeetingPlace;
 
     private LinearLayout llWDYWTL;
     private ArrayList<User> invited_user;
+
+    private static final String LOG_TAG = "Intellitapp";
+
+    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
+    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
+    private static final String OUT_JSON = "/json";
+
+    private static final String API_KEY = "AIzaSyBjXLMCAeR_cRygd1BtHxFAYWXPAhpalCI";
+
+    private ArrayList<String> resultList_global;
 
 
     @Override
@@ -75,7 +96,7 @@ public class PageBooking extends Fragment {
                 appointment.dayAndDate = "Monday , Jan 1st 2015";
                 appointment.startEndTime = "8:00 - 9:00";
                 appointment.invited_user = invited_user;
-                appointment.location = etMeetingPlace.getText().toString();
+                appointment.location = atvMeetingPlace.getText().toString();
 
 
                 ((MainActivity) getActivity()).user.booked_appoinment.add(appointment);
@@ -139,9 +160,11 @@ public class PageBooking extends Fragment {
 
     private View buildMeetingPlaceArea(LayoutInflater inflater) {
         View v = inflater.inflate(R.layout.area_meeting_place, null);
-        etMeetingPlace = (EditText) v.findViewById(R.id.etMeetingPlace);
+        resultList_global = new ArrayList<>();
+        atvMeetingPlace = (AutoCompleteTextView) v.findViewById(R.id.atvMeetingPlace);
+        atvMeetingPlace.setAdapter(new PlacesAutoCompleteAdapter(getActivity(), R.layout.autocomplete_textview));
         TypefaceIntellitap tfi = ((MainActivity) getActivity()).tfi;
-        tfi.setTypeface(etMeetingPlace, TypefaceIntellitap.ROBOTO_BOLD);
+        tfi.setTypeface(atvMeetingPlace, TypefaceIntellitap.ROBOTO_BOLD);
         return v;
     }
 
@@ -199,32 +222,58 @@ public class PageBooking extends Fragment {
         colorAnimation.start();
     }
 
-    private class PageBookingAdapter extends BaseAdapter {
 
-        private View[] views;
+    private class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
 
-        public PageBookingAdapter(View[] views) {
-            this.views = views;
+        public PlacesAutoCompleteAdapter(Context context, int textViewResourceId) {
+            super(context, textViewResourceId);
         }
 
         @Override
         public int getCount() {
-            return views.length;
+            return resultList_global.size();
         }
 
         @Override
-        public Object getItem(int position) {
-            return null;
+        public String getItem(int index) {
+            return resultList_global.get(index);
         }
 
         @Override
-        public long getItemId(int position) {
-            return 0;
-        }
+        public Filter getFilter() {
+            Filter filter = new Filter() {
+                @Override
+                protected FilterResults performFiltering(CharSequence constraint) {
+                    Log.d("Google places", "Getting into perform filtering");
+                    FilterResults filterResults = new FilterResults();
+                    if (constraint != null) {
+                        Log.d("Google places", " inside constraint!");
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return views[position];
+                        Connection con = new Connection(constraint.toString());
+                        con.execute();
+
+                        Log.d("Google places", " inside constraint : resultList_global = " + resultList_global);
+
+
+                        // Assign the data to the FilterResults
+                        filterResults.values = resultList_global;
+                        filterResults.count = resultList_global.size();
+
+                    }
+                    return filterResults;
+                }
+
+                @Override
+                protected void publishResults(CharSequence constraint, FilterResults results) {
+                    Log.d("Google places", "Getting into publish results");
+                    if (results != null && results.count > 0) {
+                        notifyDataSetChanged();
+                    } else {
+                        notifyDataSetInvalidated();
+                    }
+                }
+            };
+            return filter;
         }
     }
 
@@ -240,4 +289,77 @@ public class PageBooking extends Fragment {
             rlBook.setVisibility(View.INVISIBLE);
         }
     }
+
+    private class Connection extends AsyncTask {
+        private String input;
+
+        public Connection(String input) {
+            this.input = input;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            resultList_global = autocomplete(input);
+            Log.d("Google places api error", "Results list global in asynctask = " + resultList_global);
+            return resultList_global;
+        }
+
+        private ArrayList<String> autocomplete(String input) {
+            ArrayList<String> resultList = null;
+
+            HttpURLConnection conn = null;
+            StringBuilder jsonResults = new StringBuilder();
+            try {
+                StringBuilder sb = new StringBuilder(PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON);
+                sb.append("?key=" + API_KEY);
+                sb.append(";=country:us");
+                sb.append("&input;=" + URLEncoder.encode(input, "utf8"));
+
+
+                URL url = new URL(sb.toString());
+                conn = (HttpURLConnection) url.openConnection();
+                InputStreamReader in = new InputStreamReader(conn.getInputStream());
+
+                // Load the results into a StringBuilder
+                int read;
+                char[] buff = new char[1024];
+                while ((read = in.read(buff)) != -1) {
+                    Log.d("Google places api error", "inside red buffer 1024");
+                    jsonResults.append(buff, 0, read);
+                }
+            } catch (MalformedURLException e) {
+                Log.e(LOG_TAG, "Error processing Places API URL", e);
+                return resultList;
+            } catch (IOException e) {
+                Log.e(LOG_TAG, "Error connecting to Places API", e);
+                return resultList;
+            } finally {
+                if (conn != null) {
+                    conn.disconnect();
+                }
+            }
+
+            try {
+                // Create a JSON object hierarchy from the results
+                JSONObject jsonObj = new JSONObject(jsonResults.toString());
+                JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
+
+                // Extract the Place descriptions from the results
+                resultList = new ArrayList<String>(predsJsonArray.length());
+                for (int i = 0; i < predsJsonArray.length(); i++) {
+                    resultList.add(predsJsonArray.getJSONObject(i).getString("description"));
+                }
+            } catch (JSONException e) {
+                Log.e(LOG_TAG, "Cannot process JSON results", e);
+            }
+
+            for (String s : resultList) {
+                Log.d("Google places", "s = " + s);
+            }
+            return resultList;
+        }
+    }
+
 }
+
+
