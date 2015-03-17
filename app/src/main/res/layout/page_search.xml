@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,5 +11,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"></ListView>
+
+    <!--Unicorn not found message-->
+    <RelativeLayout
+        android:id="@+id/rlUnicorn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone">
+        <!--Unicorn image-->
+        <ImageView
+            android:id="@+id/ivUnicorn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/unicorn"
+            android:layout_marginTop="10dp" />
+
+        <!--This results in nothing text-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivUnicorn"
+            android:orientation="vertical"
+            android:layout_marginLeft="3dp">
+
+            <com.example.fron.customviews.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This"
+                custom:typeface="roboto_bold"
+                android:textSize="35sp"
+                android:textColor="@color/GrayIntellitap" />
+
+            <com.example.fron.customviews.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="results"
+                custom:typeface="roboto_bold"
+                android:textSize="35sp"
+                android:textColor="@color/GrayIntellitap" />
+
+            <com.example.fron.customviews.MyTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="in nothing"
+                custom:typeface="roboto_bold"
+                android:textSize="35sp"
+                android:textColor="@color/GrayIntellitap" />
+        </LinearLayout>
+    </RelativeLayout>
+
 
 </LinearLayout>
