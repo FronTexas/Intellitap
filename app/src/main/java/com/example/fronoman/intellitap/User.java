@@ -37,6 +37,13 @@ public class User implements Parcelable {
     };
 
     public User() {
+        firstName = "";
+        lastName = "";
+        phone = "";
+        city = "";
+        userId = "";
+        email = "";
+        profilePhotoUrl = "";
         booked_appoinment = new ArrayList<>();
         education = new ArrayList<>();
     }
