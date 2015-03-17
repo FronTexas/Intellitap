@@ -151,25 +151,45 @@ public class PageSignUp extends Fragment {
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, String> map = new HashMap<>();
                 String email = "";
                 String firstName = "";
                 String lastName = "";
-
-
+                ((MainActivity) getActivity()).user = new User();
                 for (int i = 0; i < signUpFields.size(); i++) {
-                    map.put(signUp_key[i], signUpFields.get(i).getText().toString());
-                    if (signUp_key[i].equals("email"))
-                        map.put("uniqueIdentifier", signUpFields.get(i).getText().toString());
-                    if (signUp_key[i].equals("firstName"))
+                    if (signUp_key[i].equals("email")) {
+                        email = signUpFields.get(i).getText().toString();
+                        ((MainActivity) getActivity()).user.email = email;
+                        ((MainActivity) getActivity()).user.uniqueIdentifier = email;
+                    }
+                    if (signUp_key[i].equals("firstName")) {
                         firstName = signUpFields.get(i).getText().toString();
-                    if (signUp_key[i].equals("lastName"))
+                        ((MainActivity) getActivity()).user.firstName = firstName;
+                    }
+                    if (signUp_key[i].equals("lastName")) {
                         lastName = signUpFields.get(i).getText().toString();
+                        ((MainActivity) getActivity()).user.lastName = lastName;
+                    }
+
+                    if (signUp_key[i].equals("password")) {
+                        ((MainActivity) getActivity()).user.password = signUpFields.get(i).getText().toString();
+                    }
+
+                    if (signUp_key[i].equals("phone")) {
+                        ((MainActivity) getActivity()).user.phone = signUpFields.get(i).getText().toString();
+                    }
+
+                    if (signUp_key[i].equals("city")) {
+                        ((MainActivity) getActivity()).user.city = signUpFields.get(i).getText().toString();
+                    }
+
+                    if (signUp_key[i].equals("state")) {
+                        ((MainActivity) getActivity()).user.state = signUpFields.get(i).getText().toString();
+                    }
                 }
 
+                ((MainActivity) getActivity()).user.isTutor = isTutor;
 
-
-                service.newUser(firstName, lastName, email, map, new Callback<String>() {
+                service.newUser(firstName, lastName, email, ((MainActivity) getActivity()).user, new Callback<String>() {
                     @Override
                     public void success(String s, Response response) {
                         Log.d("Signing up ", "s = " + s);
@@ -229,7 +249,6 @@ public class PageSignUp extends Fragment {
             return views[position];
         }
     }
-
 
 
 }

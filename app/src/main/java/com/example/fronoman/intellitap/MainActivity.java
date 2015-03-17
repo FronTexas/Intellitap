@@ -55,8 +55,8 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.main_activity);
         createTypefaceArray();
 
-        // TODO this is fake. In the future User will be the one who logged in not only Matthew mc :)
-        buildUser();
+//        // TODO this is fake. In the future User will be the one who logged in not only Matthew mc :)
+//        buildUser();
 
 
         // default color
@@ -91,16 +91,16 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    public void buildUser() {
-        user = new User();
-        user.firstName = "Matthew";
-        user.lastName = "Mcconaughey";
-        Education education = new Education();
-        education.schoolName = "The University of Texas At Austin";
-        user.education.add(education);
-        user.city = "Austin , TX";
-        user.profilePhotoUrl = "http://longhornleasing.com/blog/wp-content/uploads/2014/12/original.jpg";
-    }
+//    public void buildUser() {
+//        user = new User();
+//        user.firstName = "Matthew";
+//        user.lastName = "Mcconaughey";
+//        Education education = new Education();
+//        education.schoolName = "The University of Texas At Austin";
+//        user.education.add(education);
+//        user.city = "Austin , TX";
+//        user.profilePhotoUrl = "http://longhornleasing.com/blog/wp-content/uploads/2014/12/original.jpg";
+//    }
 
     public void replaceFragments(Fragment fragment, boolean addToBackStack, String tag) {
         showActionBar();

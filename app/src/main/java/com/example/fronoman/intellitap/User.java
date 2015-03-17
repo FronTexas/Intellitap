@@ -13,11 +13,14 @@ public class User implements Parcelable {
     String lastName;
     String phone;
     String city;
+    String state;
     String userId;
     String email;
     String profilePhotoUrl;
     Boolean isTutor;
     ArrayList<Education> education;
+    String uniqueIdentifier;
+    String password;
 
 
     // TODO in the futuer maybe we need to seperate between successfully booked appointment and requested(but not approved) appointment

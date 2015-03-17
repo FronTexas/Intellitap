@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.FieldMap;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -32,7 +33,7 @@ public interface IntellitappService {
     void newUser(@Path("firstName") String firstName,
                  @Path("lastName") String lastName,
                  @Path("email") String email,
-                 @QueryMap Map<String, String> signUpField,
+                 @Body User user,
                  Callback<String> callback);
 
 
