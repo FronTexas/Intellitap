@@ -44,7 +44,7 @@ public class Appointment implements Parcelable {
         this.user = user;
         invited_user = new ArrayList<>();
         if (user instanceof Tutor)
-            skills = ((Tutor) user).skills;
+            skills = new ArrayList<>();
 
     }
 

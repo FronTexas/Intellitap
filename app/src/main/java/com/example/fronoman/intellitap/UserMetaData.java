@@ -27,15 +27,15 @@ public class UserMetaData extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.area_provider_meta_data, null);
 
-        scaleDP = ((MainActivity)context).scaleDP;
-        profpicsize = (int)(100*scaleDP + 0.5f);
+        scaleDP = ((MainActivity) context).scaleDP;
+        profpicsize = (int) (100 * scaleDP + 0.5f);
 
 
         tvName = (MyTextView) v.findViewById(R.id.tvName);
         tvName.setText(user.getFullName());
 
         tvInstitute = (MyTextView) v.findViewById(R.id.tvInstitute);
-        tvInstitute.setText(user.education);
+        tvInstitute.setText(user.education.get(0).schoolName);
 
         tvLocation = (MyTextView) v.findViewById(R.id.tvLocation);
         tvLocation.setText(user.city);
@@ -59,10 +59,10 @@ public class UserMetaData extends LinearLayout {
         tvLocation.setText(location);
     }
 
-    public void loadProfilePicture(){
-        if (user.profilePhotoUrl.length() > 1){
+    public void loadProfilePicture() {
+        if (user.profilePhotoUrl.length() > 1) {
             ivProviderPicture.setBackgroundResource(android.R.color.transparent);
-            Picasso.with(getContext()).load(user.profilePhotoUrl).resize(profpicsize,profpicsize).centerCrop().into(ivProviderPicture);
+            Picasso.with(getContext()).load(user.profilePhotoUrl).resize(profpicsize, profpicsize).centerCrop().into(ivProviderPicture);
         }
     }
 }

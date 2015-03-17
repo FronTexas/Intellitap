@@ -13,13 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.net.PasswordAuthentication;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by Fahran on 1/18/2015.
@@ -31,9 +34,19 @@ public class PageSignUp extends Fragment {
 
     private boolean sign_up_button_shown;
 
+    private IntellitappService service;
+
+    private ArrayList<EditTextCustom> signUpFields;
+
+    private boolean isTutor;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         sign_up_button_shown = false;
+
+        service = ((MainActivity) getActivity()).service;
+
         ((MainActivity) getActivity()).setActionBarColor(getResources().getColor(R.color.GreenIntellitap));
         ((MainActivity) getActivity()).setActionBarTitle("Sign up");
 
@@ -60,7 +73,7 @@ public class PageSignUp extends Fragment {
         LinearLayout llCardMain = (LinearLayout) v.findViewById(R.id.llMainCard);
 
         String[] hints = new String[]{"First Name", "Last Name", "Email", "Password", "Confirm Password", "Phone", "City", "State"};
-        ArrayList<EditTextCustom> ets = new ArrayList<>();
+        signUpFields = new ArrayList<>();
 
         for (int i = 0; i < hints.length; i++) {
             EditTextCustom et = new EditTextCustom(v.getContext(), hints[i]);
@@ -69,7 +82,7 @@ public class PageSignUp extends Fragment {
                 et.setTransformationMethod(PasswordTransformationMethod.getInstance());
             } else if (hints[i].equals("Phone"))
                 et.setInputType(InputType.TYPE_CLASS_NUMBER);
-            ets.add(et);
+            signUpFields.add(et);
         }
 
         View areYouTutor = inflater.inflate(R.layout.area_are_you_tutor, null);
@@ -98,6 +111,7 @@ public class PageSignUp extends Fragment {
                     EditTextCustom listOfSkills = new EditTextCustom(getActivity(), "List of skills");
                     llCardMain.addView(listOfSkills, llCardMain.getChildCount() - 1);
                     listOfSkills.requestFocus();
+                    isTutor = true;
                 }
             }
         });
@@ -115,6 +129,7 @@ public class PageSignUp extends Fragment {
                         // remove list of skills
                         llCardMain.removeViewAt(9);
                     }
+                    isTutor = false;
                 }
             }
         });
@@ -131,10 +146,29 @@ public class PageSignUp extends Fragment {
         button_sign_up.setTextSize(17);
         button_sign_up.setButtonColor(getResources().getColor(R.color.RedIntellitap));
         llMain.addView(button_sign_up);
-
+        final String[] signUp_key = new String[]{"firstName", "lastName", "email", "password", "checkPassword", "phone", "city", "state"};
         button_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                HashMap<String, String> map = new HashMap<>();
+                for (int i = 0; i < signUpFields.size(); i++) {
+                    map.put(signUp_key[i], signUpFields.get(i).getText().toString());
+                    if (signUp_key[i].equals("email"))
+                        map.put("uniqueIdentifie", signUpFields.get(i).getText().toString());
+                }
+                map.put("isTutor", "" + isTutor);
+                service.newUser(map, new Callback<String>() {
+                    @Override
+                    public void success(String s, Response response) {
+                        Log.d("Signing up ", "s = " + s);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.d("Signing up", "error = " + error.toString());
+                    }
+                });
+
                 DialogConfirmationCode d = DialogConfirmationCode.newInstance();
                 FragmentManager fm = getFragmentManager();
                 d.show(fm, "");

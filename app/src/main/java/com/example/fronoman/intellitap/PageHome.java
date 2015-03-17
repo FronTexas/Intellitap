@@ -35,7 +35,6 @@ public class PageHome extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle("Homepage");
         scaleDP = ((MainActivity) getActivity()).scaleDP;
 
-        StopWatch s = new StopWatch();
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) (25 * scaleDP + 0.5f), (int) (25 * scaleDP + 0.5f));
         ImageView action_bar_action = new ImageView(getActivity());
@@ -52,45 +51,22 @@ public class PageHome extends Fragment {
         View v = inflater.inflate(R.layout.page_home, null);
         lvMain = (ListView) v.findViewById(R.id.lvMain);
 
-        s.start();
         View pmd = buildProviderMetaData(inflater);
-        Log.d("Homepage performance", "After metadata = " + s.getTime());
 
-        s.reset();
-        s.start();
         User user = ((MainActivity) getActivity()).user;
         View booked_appointment_board = new View(getActivity());
         if (user.booked_appoinment != null && user.booked_appoinment.size() > 0) {
             booked_appointment_board = buildBookedAppointment(inflater, user);
         }
-        s.stop();
-        Log.d("Homepage performance", "After booked appointment board = " + s.getTime());
 
-        s.reset();
-        s.start();
         HomepageBoards teaching_request_board = buildTeachingRequest(inflater);
-        s.stop();
-        Log.d("Homepage performance", "After teaching request = " + s.getTime());
 
-        s.reset();
-        s.start();
         HomepageBoards chat_notif = buildChatNotif(inflater);
-        s.stop();
-        Log.d("Homepage performance", "After chat notif = " + s.getTime());
 
-        s.reset();
-        s.start();
         HomepageBoards weekly_summary = buildWeeklySummary(inflater);
-        s.stop();
-        Log.d("Homepage performance", "After weekly summary = " + s.getTime());
-
-        s.reset();
-        s.start();
         View[] views = new View[]{pmd, booked_appointment_board, teaching_request_board, chat_notif, weekly_summary};
         PageHomeAdapter phadapter = new PageHomeAdapter(views);
         lvMain.setAdapter(phadapter);
-        s.stop();
-        Log.d("Homepage performance", "After setting adapter = " + s.getTime());
 
 
         return v;
@@ -170,7 +146,17 @@ public class PageHome extends Fragment {
 
         MyTextView tvSubject = (MyTextView) v.findViewById(R.id.tvSubject);
         if (appointment.user instanceof Tutor) {
-            tvSubject.setText(((Tutor) appointment.user).skills);
+            StringBuffer subject_chosen = new StringBuffer();
+            int i = 0;
+            for (Skill s : appointment.skills) {
+                subject_chosen.append(s.skillName);
+                Log.d("Appointment error", "Skill name = " + s.skillName);
+                if (i != appointment.skills.size() - 1) {
+                    subject_chosen.append(", ");
+                }
+                i++;
+            }
+            tvSubject.setText(subject_chosen.toString());
         } else {
             tvSubject.setVisibility(View.GONE);
         }

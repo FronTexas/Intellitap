@@ -16,7 +16,6 @@ public class Tutor extends User {
     Boolean isTutor;
     ArrayList<Skill> skills;
     ArrayList<Employment> employments;
-    ArrayList<Education> educations;
 //    ArrayList<DateIntellitapp> datesAvailable;
 
 
@@ -38,10 +37,9 @@ public class Tutor extends User {
         }
     };
 
-    public Tutor() {
+    public Tutor(){
 
     }
-
 
     public Tutor(Parcel in) {
         super(in);
@@ -49,8 +47,7 @@ public class Tutor extends User {
         isTutor = in.readByte() != 0;
         in.readList(skills, Skill.class.getClassLoader());
         in.readList(employments, Employment.class.getClassLoader());
-        in.readList(educations, Education.class.getClassLoader());
-//        datesAvailable = in.readString();
+//      datesAvailable = in.readString();
     }
 
     @Override
@@ -60,13 +57,16 @@ public class Tutor extends User {
         out.writeByte((byte) (isTutor ? 1 : 0));
         out.writeList(skills);
         out.writeList(employments);
-        out.writeList(educations);
     }
 }
 
 class Skill implements Parcelable {
     String skillName;
     int skillId;
+
+    public Skill() {
+
+    }
 
     public Skill(Parcel in) {
         skillName = in.readString();
@@ -124,45 +124,5 @@ class Employment implements Parcelable {
     }
 }
 
-class Education implements Parcelable {
-    String concentration1;
-    String concentration2;
-    int educationId;
-    String endDate;
-    String level;
-    String description;
-    String schoolName;
-    int userId;
-    String startDate;
 
-    public Education(Parcel in) {
-        concentration1 = in.readString();
-        concentration2 = in.readString();
-        educationId = in.readInt();
-        endDate = in.readString();
-        level = in.readString();
-        description = in.readString();
-        schoolName = in.readString();
-        userId = in.readInt();
-        startDate = in.readString();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeString(concentration1);
-        out.writeString(concentration2);
-        out.writeInt(educationId);
-        out.writeString(endDate);
-        out.writeString(level);
-        out.writeString(description);
-        out.writeString(schoolName);
-        out.writeInt(userId);
-        out.writeString(startDate);
-    }
-}
 

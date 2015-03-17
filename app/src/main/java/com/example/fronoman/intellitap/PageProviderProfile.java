@@ -90,7 +90,7 @@ public class PageProviderProfile extends Fragment {
 
 
         TextView tvInstitute = (TextView) v.findViewById(R.id.tvInstitute);
-        tvInstitute.setText(tutor.education);
+        tvInstitute.setText(tutor.education.get(0).schoolName);
 
 
         TextView tvLocation = (TextView) v.findViewById(R.id.tvLocation);
@@ -137,8 +137,16 @@ public class PageProviderProfile extends Fragment {
     private View buildExpertiseArea(LayoutInflater inflater) {
         View v = inflater.inflate(R.layout.area_expertise, null);
         MyTextView tvExpertise = (MyTextView) v.findViewById(R.id.tvExpertise);
-        tvExpertise.setText(tutor.skills);
-
+        StringBuffer skills = new StringBuffer();
+        int i = 0;
+        for (Skill s : tutor.skills) {
+            skills.append(s.skillName);
+            if (i != tutor.skills.size() - 1) {
+                skills.append(", ");
+            }
+            i++;
+        }
+        tvExpertise.setText(skills.toString());
         return v;
     }
 

@@ -63,19 +63,17 @@ public class PageBooking extends Fragment {
             @Override
             public void onClick(View v) {
                 Appointment appointment = new Appointment(tutor);
-                StringBuffer skills = new StringBuffer();
+
                 for (int i = 0; i < llWDYWTL.getChildCount(); i++) {
                     TextView tv = (TextView) llWDYWTL.getChildAt(i);
                     if (tv.getCurrentTextColor() == getResources().getColor(R.color.GreenIntellitap)) {
-                        skills.append(tv.getText());
-                        if (i != llWDYWTL.getChildCount() - 1) {
-                            skills.append(",");
-                        }
+                        Skill skill = new Skill();
+                        skill.skillName = tv.getText().toString();
+                        appointment.skills.add(skill);
                     }
                 }
                 appointment.dayAndDate = "Monday , Jan 1st 2015";
                 appointment.startEndTime = "8:00 - 9:00";
-                appointment.skills = skills;
                 appointment.invited_user = invited_user;
                 appointment.location = etMeetingPlace.getText().toString();
 

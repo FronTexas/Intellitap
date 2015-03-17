@@ -35,10 +35,11 @@ public class PageSearch extends Fragment implements PageSearchHeader.OnSearchLis
     private EditText etSearchBox;
     private SearchPageAdapter searchAdapter;
 
-    RestAdapter adapter;
-    IntellitappService service;
 
     private List<Tutor> tutors;
+
+    IntellitappService service;
+
 
     //TODO remove this once search service already done. This is fake!
     private List<Tutor> fake_tutors;
@@ -55,11 +56,7 @@ public class PageSearch extends Fragment implements PageSearchHeader.OnSearchLis
         ((MainActivity) getActivity()).setActionBarColor(getResources().getColor(R.color.BlueIntellitap));
         ((MainActivity) getActivity()).setActionBarTitle("Search");
 
-        adapter = new RestAdapter.Builder()
-                .setEndpoint(C.MAIN_URL)
-                .build();
-
-        service = adapter.create(IntellitappService.class);
+        service = ((MainActivity) getActivity()).service;
 
 
         tfi = ((MainActivity) getActivity()).tfi;

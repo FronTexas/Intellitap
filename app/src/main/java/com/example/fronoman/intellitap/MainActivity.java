@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.fron.customviews.TypefaceIntellitap;
 
+import retrofit.RestAdapter;
+
 
 /**
  * Created by Fahran on 1/12/2015.
@@ -35,9 +37,21 @@ public class MainActivity extends FragmentActivity {
 
     public User user;
 
+    RestAdapter adapter;
+    IntellitappService service;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        adapter = new RestAdapter.Builder()
+                .setEndpoint(C.MAIN_URL)
+                .build();
+
+        service = adapter.create(IntellitappService.class);
+
         setContentView(R.layout.main_activity);
         createTypefaceArray();
 
@@ -81,7 +95,9 @@ public class MainActivity extends FragmentActivity {
         user = new User();
         user.firstName = "Matthew";
         user.lastName = "Mcconaughey";
-        user.education = "The University Of Texas At Austin";
+        Education education = new Education();
+        education.schoolName = "The University of Texas At Austin";
+        user.education.add(education);
         user.city = "Austin , TX";
         user.profilePhotoUrl = "http://longhornleasing.com/blog/wp-content/uploads/2014/12/original.jpg";
     }

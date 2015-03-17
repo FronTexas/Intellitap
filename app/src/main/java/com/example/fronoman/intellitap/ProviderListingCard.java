@@ -78,15 +78,25 @@ public class ProviderListingCard extends RelativeLayout {
         tvName.setText(tutor.firstName + " " + tutor.lastName);
 
         tvInstitute = (TextView) v.findViewById(R.id.tvInstitute);
-        tvInstitute.setText(tutor.education);
+        Log.d("JSON Tutor", "tutor.education = " + tutor.education);
+        tvInstitute.setText(tutor.education.get(0).schoolName);
 
         tvLocation = (TextView) v.findViewById(R.id.tvLocation);
         tvLocation.setText(tutor.city);
 
         tvRelevantExpertiseText = (TextView) v.findViewById(R.id.tvRelevantExpertiseText);
         tvRelevantExpertiseList = (TextView) v.findViewById(R.id.tvRelevantExpertiseList);
-        if (tutor.skills.length() > 0) {
-            tvRelevantExpertiseList.setText(tutor.skills);
+        if (tutor.skills.size() > 0) {
+            int i = 0;
+            StringBuffer sb = new StringBuffer();
+            for (Skill s : tutor.skills) {
+                sb.append(s.skillName);
+                if (i != tutor.skills.size() - 1) {
+                    sb.append(", ");
+                }
+                i++;
+            }
+            tvRelevantExpertiseList.setText(sb.toString());
         }
         tvPreferredLocationText = (TextView) v.findViewById(R.id.tvPreferredLocationText);
         tvPreferredLocationList = (TextView) v.findViewById(R.id.tvPreferredLocationList);
