@@ -3,7 +3,7 @@ package com.example.tinyclass;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.fronoman.intellitap.TimeSlot;
+import com.example.fronoman.intellitapp.TimeSlot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

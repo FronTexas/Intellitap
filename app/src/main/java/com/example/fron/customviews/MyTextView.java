@@ -4,13 +4,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
-import com.example.fron.customviews.TypefaceCache;
-import com.example.fronoman.intellitap.MainActivity;
-import com.example.fronoman.intellitap.R;
+import com.example.fronoman.intellitapp.R;
 
 
 /**
@@ -20,7 +16,7 @@ public class MyTextView extends TextView {
     private Context context;
     private int tf;
 
-    private final String[] typefaces = new String[]{"roboto_bold.ttf", "roboto_bold_italic.ttf", "roboto_italic.ttf", "roboto_regular.ttf"};
+    private final String[] typefaces = new String[]{"roboto_bold.ttf", "roboto_bold_italic.ttf", "roboto_italic.ttf", "roboto_regular.ttf", "Action_Man.ttf", "helsinki.ttf"};
 
     public MyTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -40,7 +36,7 @@ public class MyTextView extends TextView {
     }
 
     private void init() {
-        setTypeface(TypefaceCache.get(getContext().getAssets(),typefaces[tf]));
+        setTypeface(TypefaceCache.get(getContext().getAssets(), typefaces[tf]));
     }
 
     @Override

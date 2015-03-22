@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,20 +12,86 @@
         android:layout_height="70dp"
         android:src="@drawable/place_icon" />
 
-    <AutoCompleteTextView
-        android:id="@+id/atvMeetingPlace"
-        android:layout_width="match_parent"
+    <!--Search place button-->
+    <RelativeLayout
+        android:id="@+id/rlSearchPlaceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@color/GreenIntellitap"
+        android:layout_marginTop="10dp">
+
+        <com.example.fron.customviews.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search place"
+            custom:typeface="roboto_bold"
+            android:textSize="20sp"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+    <!--Places selected -->
+    <RelativeLayout
+        android:id="@+id/rlPlacesSelected"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:padding="10dp"
-        android:hint="Meeting place"
-        android:layout_marginTop="10dp"
-        android:singleLine="true"
-        android:imeOptions="actionNext" />
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="35dp"
+        android:layout_below="@+id/ivChecked"
+        android:layout_marginTop="5dp"
+        android:visibility="gone">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/drop_shadow_down" />
+        <!--Place icon-->
+        <RelativeLayout
+            android:id="@+id/rlPlacesIcon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@color/RedIntellitap"
+            android:layout_centerVertical="true" />
+
+        <!--Places information-->
+        <LinearLayout
+            android:id="@+id/llPlacesInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/rlPlacesIcon"
+            android:layout_marginLeft="10dp">
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvPlaceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto_bold"
+                android:textColor="@color/Gray4d"
+                android:text="Place name"
+                android:textSize="17sp" />
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto"
+                android:textColor="@color/GrayIntellitap"
+                android:text="Adress"
+                android:textSize="10sp" />
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto"
+                android:textColor="@color/GrayIntellitap"
+                android:text="Description"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

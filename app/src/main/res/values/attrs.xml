@@ -4,6 +4,8 @@
         <enum name="roboto_bold_italic" value="1" />
         <enum name="roboto_italic" value="2" />
         <enum name="roboto" value="3" />
+        <enum name="action_man" value="4" />
+        <enum name="helsinki" value="5" />
     </attr>
     <declare-styleable name="MyTextView">
         <attr name="typeface" />

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.example.fronoman.intellitap"
+        applicationId "com.example.fronoman.intellitapp"
         minSdkVersion 16
         targetSdkVersion 21
         versionCode 1
@@ -30,8 +30,23 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.0'
     compile 'com.pkmmte.view:circularimageview:1.1'
     compile 'org.apache.commons:commons-lang3:3.0'
-
-
-
-
+    compile 'com.google.android.gms:play-services:6.5.87'
+    compile 'com.jakewharton:butterknife:6.1.0'
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'me.tatarka.holdr:gradle-plugin:1.4.1'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.holdr'

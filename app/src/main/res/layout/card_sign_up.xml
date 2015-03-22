@@ -17,9 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:background="@android:color/white"
-        android:layout_below="@+id/rlPictures"
-        android:layout_marginTop="-70dp"
-        android:paddingTop="60dp"
+        android:paddingTop="20dp"
         android:paddingBottom="30dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -34,31 +32,6 @@
         android:layout_height="2dp"
         android:background="@drawable/drop_shadow_down"
         android:layout_below="@id/llMainCard" />
-
-    <!--Provider pictures area-->
-    <RelativeLayout
-        android:id="@+id/rlPictures"
-        android:layout_width="105dp"
-        android:layout_height="105dp"
-        android:background="@drawable/circle"
-        android:layout_centerHorizontal="true">
-
-        <ImageView
-            android:id="@+id/ivProviderPicture"
-            android:layout_width="95dp"
-            android:layout_height="95dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/circle_blue"></ImageView>
-
-        <com.example.fron.customviews.MyTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            custom:typeface="roboto_bold"
-            android:textColor="@android:color/white"
-            android:textSize="50sp"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
 
 
 </RelativeLayout>

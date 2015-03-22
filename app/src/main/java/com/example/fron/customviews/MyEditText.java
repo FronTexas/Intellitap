@@ -4,10 +4,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.EditText;
 
-import com.example.fronoman.intellitap.R;
+import com.example.fronoman.intellitapp.R;
 
 /**
  * Created by Fahran on 1/18/2015.

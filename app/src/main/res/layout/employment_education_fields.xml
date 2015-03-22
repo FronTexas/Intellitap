@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:animateLayoutChanges="true">
+
+    <!--et company or school name-->
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="wrap_content"
+        android:hint="Company name"
+        android:layout_height="wrap_content"
+        android:textColorHint="@android:color/white"
+        android:textSize="26sp"
+        android:alpha="0.5"
+        android:textColor="@android:color/white"
+        android:background="@android:color/transparent"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:inputType="textCapWords" />
+
+    <!--et position or field of study-->
+    <EditText
+        android:id="@+id/etPosition"
+        android:hint="Position"
+        android:textColor="@android:color/white"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColorHint="@android:color/white"
+        android:textSize="17sp"
+        android:alpha="0.5"
+        android:background="@android:color/transparent"
+        android:inputType="textCapSentences" />
+
+    <!--ll Start end date-->
+    <LinearLayout
+        android:id="@+id/llStartEndDate"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+        <!--Month start-->
+        <LinearLayout
+            android:id="@+id/llMonthStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvMonthStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto_bold"
+                android:text="Month"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:layout_marginBottom="1dp" />
+
+        </LinearLayout>
+        <!--Year start-->
+        <EditText
+            android:id="@+id/etYearStarts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Year"
+            android:textColorHint="@android:color/white"
+            android:alpha="0.5"
+            android:textSize="17sp"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="5dp"
+            android:textColor="@android:color/white"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:inputType="number" />
+
+        <!--Dash-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="-"
+            android:layout_marginLeft="5dp" />
+
+        <!--Month end-->
+        <LinearLayout
+            android:id="@+id/llMonthEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp">
+
+            <com.example.fron.customviews.MyTextView
+                android:id="@+id/tvMonthEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:typeface="roboto_bold"
+                android:text="Month"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:layout_marginBottom="1dp" />
+
+
+        </LinearLayout>
+        <!--Year ends-->
+        <EditText
+            android:id="@+id/etYearEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Year"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
+            android:alpha="0.5"
+            android:textSize="17sp"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="5dp"
+            android:singleLine="true"
+            android:imeOptions="actionNext"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llIsCurrent"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <!--White Selector-->
+        <RelativeLayout
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/round_corner_rectangle_bluedark"
+            android:layout_marginBottom="15dp">
+
+            <View
+                android:id="@+id/whiteSelector"
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:background="@drawable/round_corner_rectangle_white"
+                android:layout_centerInParent="true"
+                android:elevation="2dp"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <!--tv is current-->
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvIsCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:typeface="roboto_bold"
+            android:text="I am currently here"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/white"
+        android:elevation="2dp">
+
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            custom:typeface="roboto_bold"
+            android:textSize="20sp"
+            android:textColor="@color/BlueIntellitap" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

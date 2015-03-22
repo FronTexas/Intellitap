@@ -5,9 +5,9 @@ http://intellitubbieenv-sp5hbwrbgb.elasticbeanstalk.com/app/resources/newUser/Bu
 
 Query tutors
 http://intellitubbieenv-sp5hbwrbgb.elasticbeanstalk.com/app/resources/queryTutors?city=Austin&state=TX
-http://intellitubbieenv-sp5hbwrbgb.elasticbeanstalk.com/app/resources/queryTutors?identifier=Fahran
-http://intellitubbieenv-sp5hbwrbgb.elasticbeanstalk.com/app/resources/queryTutors?skill=ma
 
-http://intellitubbieenv-sp5hbwrbgb.elasticbeanstalk.com/app/resources/newUser/Bugs-Bunny/bugs@bunny.com
+C:\Users\Fahran\Desktop\AndroidStudioWorkspace\Intellitap\intellitap2.jks
 
+Command to get keystore :
+keytool -exportcert -alias androiddebugkey -keystore C:\Users\Fahran\Desktop\AndroidStudioWorkspace\Intellitap\intellitapp.jks -list -v
 keytool -exportcert -alias androiddebugkey -keystore C:\Users\Fahran\.android\debug.keystore -list -v

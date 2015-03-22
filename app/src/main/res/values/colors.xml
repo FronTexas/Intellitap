@@ -10,6 +10,11 @@
     <color name="Gray4d">#4d4d4d</color>
     <color name="DarkBlueIntellitap">#2d3e50</color>
     <color name="Gray20">#cccccc</color>
+    <color name="Gray80">#333333</color>
+    <color name="RedWhiteTransparent">#e88279</color>
+    <color name="GreenWhiteTransparent">#6fd59a</color>
+    <color name="BlueWhiteTransparent">#73b3df</color>
+    <color name="BlueIntellitappDark">#2079b6</color>
 
 
 </resources>

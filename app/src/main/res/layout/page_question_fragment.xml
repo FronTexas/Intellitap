@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rootLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="30dp">
+            <!--Question , answer , list area-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+                <!--Question line 1-->
+                <com.example.fron.customviews.MyTextView
+                    android:id="@+id/tvQuestion1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    custom:typeface="roboto_bold"
+                    android:text="What"
+                    android:textSize="35sp"
+                    android:layout_marginBottom="5dp" />
+                <!--Question line 2-->
+                <com.example.fron.customviews.MyTextView
+                    android:id="@+id/tvQuestion2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    custom:typeface="roboto_bold"
+                    android:text="are you good at?"
+                    android:textSize="35sp"
+                    android:layout_marginBottom="5dp" />
+                <!--etAnswer-->
+                <EditText
+                    android:id="@+id/etAnswer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Answer"
+                    android:textSize="25sp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white"
+                    android:background="@android:color/transparent"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:alpha="0.5" />
+                <!--ll views-->
+                <LinearLayout
+                    android:id="@+id/llViews"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:animateLayoutChanges="true"></LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

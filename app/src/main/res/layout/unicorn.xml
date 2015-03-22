@@ -16,41 +16,31 @@
             android:id="@+id/ivUnicorn"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/unicorn"
-            android:layout_marginTop="10dp" />
+            android:src="@drawable/unicorn_shining"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true" />
 
-        <!--This results in nothing text-->
-        <LinearLayout
+        <com.example.fron.customviews.MyTextView
+            android:id="@+id/tvSearchUnicorn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivUnicorn"
-            android:orientation="vertical"
-            android:layout_marginLeft="3dp">
+            android:layout_centerHorizontal="true"
+            android:text='"Search unicorns somewhere else"'
+            android:layout_below="@+id/ivUnicorn"
+            android:textSize="17sp"
+            android:layout_marginTop="10dp"
+            custom:typeface="helsinki" />
 
-            <com.example.fron.customviews.MyTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This"
-                custom:typeface="roboto_bold"
-                android:textSize="35sp"
-                android:textColor="@color/Gray4d" />
+        <com.example.fron.customviews.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvSearchUnicorn"
+            android:text="-intellitubie"
+            android:layout_alignRight="@id/tvSearchUnicorn"
+            android:layout_marginRight="40dp"
+            custom:typeface="action_man" />
 
-            <com.example.fron.customviews.MyTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="results"
-                custom:typeface="roboto_bold"
-                android:textSize="35sp"
-                android:textColor="@color/Gray4d" />
 
-            <com.example.fron.customviews.MyTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="in nothing"
-                custom:typeface="roboto_bold"
-                android:textSize="35sp"
-                android:textColor="@color/Gray4d" />
-        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>
